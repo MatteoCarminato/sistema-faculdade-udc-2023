@@ -10,7 +10,7 @@ class CountryController extends Controller
     public function index()
     {
         $countries = Country::orderBy('name')->paginate(10);
-        return view('private.payment_form.create');
+        return view('private.countries.index', compact('countries'));
     }
 
     public function create()
