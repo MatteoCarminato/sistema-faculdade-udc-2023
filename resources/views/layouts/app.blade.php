@@ -516,7 +516,7 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Condição de Pagamento</span>
+                                        <span class="side-menu__label">{{ __('Forma de Pagamento') }}</span>
                                     <i class="angle fe fe-chevron-right"></i>
                                 </a>
 								<ul class="slide-menu">
@@ -525,8 +525,29 @@
 											<div class="tab-content">
 												<div class="tab-pane active" id="side1">
 													<ul class="sidemenu-list">
-                                                        <li><a href="cards.html" class="slide-item"> Listagem Cidades</a></li>
-                                                        <li><a href="calendar.html" class="slide-item"> Cadastro Cidade</a></li>
+                                                        <li><a href="{{route('payment_forms.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('payment_forms.create')}}" class="slide-item"> {{ __(' Cadastrar') }}</a></li>
+													</ul>
+                                                </div>
+											</div>
+										</div>
+									</li>
+								</ul>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                                    <i class="side-menu__icon feather-home"></i>
+                                        <span class="side-menu__label">{{ __('Condição de Pagamento') }}</span>
+                                    <i class="angle fe fe-chevron-right"></i>
+                                </a>
+								<ul class="slide-menu">
+									<li class="panel sidetab-menu">
+										<div class="panel-body tabs-menu-body p-0 border-0">
+											<div class="tab-content">
+												<div class="tab-pane active" id="side1">
+													<ul class="sidemenu-list">
+                                                    <li><a href="{{route('payment_terms.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('payment_terms.create')}}" class="slide-item"> {{ __(' Cadastrar') }}</a></li>
 													</ul>
                                                 </div>
 											</div>

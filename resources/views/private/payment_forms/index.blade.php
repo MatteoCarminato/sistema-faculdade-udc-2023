@@ -26,6 +26,13 @@
                 <a href="{{ route('payment_forms.create') }}" class="btn btn-primary">{{ __('Cadastrar') }}</a>
             </div>
             <div class="card-body">
+            <form method="GET" class="mb-5">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control"
+                           placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Filtrar</button>
+                </div>
+            </form>
             @if (session('success'))
                 <div class="row">
                     <div class="col-sm-12">
@@ -80,6 +87,9 @@
                     </table>
                 </div>
             </div>
+            <div class="card-footer">
+                    {{ $payment_form->links() }}
+                </div>
         </div>
     </div>
 </div>

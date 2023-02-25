@@ -11,10 +11,11 @@ class PaymentFormController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $payment_form = PaymentForm::all();
-
+        $searchTerm = $request->input('search') ?? '';
+        $payment_form = PaymentForm::search($searchTerm)->paginate(10);
+        
         return view('private.payment_forms.index', compact('payment_form'));
     }
 
