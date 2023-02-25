@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Installment;
 use App\Models\PaymentTerm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,9 +13,12 @@ class PaymentTermController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $paymentTerms = PaymentTerm::all();
+
+        $searchTerm = $request->input('search') ?? '';
+        $paymentTerms = PaymentTerm::search($searchTerm)->paginate(10);
+        
         return view('private.payment_terms.index', compact('paymentTerms'));
     }
 
@@ -31,17 +35,49 @@ class PaymentTermController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'condicao_pagamento' => 'required|string',
+            'multa' => 'required|numeric|min:0',
+            'juro' => 'required|numeric|min:0',
+            'desconto' => 'required|numeric|min:0|max:100',
+
+            'parcelas' => 'required','array','json',
+            'parcelas.*.qnt' => 'required','numeric',
+            'parcelas.*.dias' => 'required','numeric',
+            'parcelas.*.porcentual' => 'required','numeric',
+            'parcelas.*.codFormaPagamento' => 'required','numeric'
+        ]);
+
+        //Descobrir qnts de parcelas
+        $decodeInstallments = $validatedData['parcelas'];
+        $installments = json_decode($decodeInstallments, true);
+        $qntInstallments = count($installments);
+
+
         $paymentTerm = new PaymentTerm([
-            'condicao_pagamento' => $request->get('condicao_pagamento'),
-            'multa' => $request->get('multa'),
-            'juro' => $request->get('juro'),
-            'desconto' => $request->get('desconto'),
-            'qtd_parcelas' => $request->get('qtd_parcelas')
+            'condicao_pagamento' => $validatedData['condicao_pagamento'],
+            'multa' => $validatedData['multa'],
+            'juro' => $validatedData['juro'],
+            'desconto' => $validatedData['desconto'],
+            'qtd_parcelas' => $qntInstallments
         ]);
 
         DB::beginTransaction();
         try {
             $paymentTerm->save();
+
+            foreach ($installments as $index => $installment) {
+                $installment = new Installment([
+                    'payment_term_id' => $paymentTerm->id,
+                    'payment_form_id' => $installment['codFormaPagamento'],
+                    'parcela' => $installment['qnt'],
+                    'dias' => $installment['dias'],
+                    'porcentual' => $installment['porcentual'],
+                ]);
+
+                $installment->save();
+            };
+
             DB::commit();
 
             return redirect()->route('payment_terms.index')->with('success', 'Condição de Pagamento criado com sucesso.');

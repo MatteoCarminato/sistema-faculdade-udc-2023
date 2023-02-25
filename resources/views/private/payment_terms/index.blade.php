@@ -7,11 +7,11 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">{{ __('Forma de Pagamento') }}</h1>
+    <h1 class="page-title">{{ __('Condição de Pagamento') }}</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Forma de Pagamento') }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('Condição de Pagamento') }}</li>
         </ol>
     </div>
 </div>
@@ -22,8 +22,8 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="card-title">{{ __('Listagem Forma de Pagamento') }}</h3>
-                <a href="{{ route('payment_forms.create') }}" class="btn btn-primary">{{ __('Cadastrar') }}</a>
+                <h3 class="card-title">{{ __('Listagem Condição de Pagamento') }}</h3>
+                <a href="{{ route('payment_terms.create') }}" class="btn btn-primary">{{ __('Cadastrar') }}</a>
             </div>
             <div class="card-body">
             {{-- Alert Messages --}}
@@ -41,22 +41,22 @@
                 <div class="table-responsive">
                     <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                         <thead>
-                            <th>{{ __('Forma de Pagamento') }}</th>
+                            <th>{{ __('Condição de Pagamento') }}</th>
                             <th>{{ __('Data de Criação') }}</th>
                             <th>{{ __('Data de Alteração') }}</th>
                             <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Ações') }}</th>
                         </thead>
                         <tbody>
-                            @foreach($payment_form as $paymentForm)
+                            @foreach($paymentTerms as $paymentTerm)
                             <tr>
-                                <td>{{ $paymentForm->forma_pagamento }}</td>
-                                <td>{{ $paymentForm->created_at }}</td>
-                                <td>{{ $paymentForm->updated_at }}</td>
+                                <td>{{ $paymentTerm->condicao_pagamento }}</td>
+                                <td>{{ $paymentTerm->created_at }}</td>
+                                <td>{{ $paymentTerm->updated_at }}</td>
                                 <td class="td-actions text-right">
-                                    <form action="{{ route('payment_forms.destroy', $paymentForm->id) }}" method="post">
+                                    <form action="{{ route('payment_terms.destroy', $paymentTerm->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a class="btn btn-warning" href="{{ route('payment_forms.edit', $paymentForm->id) }}" data-original-title="" title="">
+                                        <a class="btn btn-warning" href="{{ route('payment_terms.edit', $paymentTerm->id) }}" data-original-title="" title="">
                                             <i class="material-icons">Editar</i>
                                             <div class="ripple-container"></div>
                                         </a>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                    {{ $payment_form->links() }}
+                    {{ $paymentTerms->links() }}
                 </div>
         </div>
     </div>

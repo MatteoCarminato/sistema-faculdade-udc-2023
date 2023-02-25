@@ -7,9 +7,14 @@
             <div class="modal-body">
             <div class="card-body">
 
-            <form method="GET" class="mb-5">
-                <div class="input-group mb-3">
-                    <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
+            <form method="GET">
+                <div class="row"> 
+                    <div class="col-9 col-md-9" style="text-align: left;margin-bottom: 17px;">
+                        <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
+                    </div>
+                    <div class="col-3 col-md-3">
+                    <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_payment_form"> Cadastrar </button>
+                    </div>
                 </div>
             </form>
 
@@ -36,6 +41,10 @@
     </div>
 </div>
 
+{{-- Modal --}}
+    @include('components.modal.modal_create_payment_form')
+{{-- Modal --}}
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script> 
@@ -49,7 +58,6 @@ $(document).ready(function() {
     $.ajax({
         url: url,
         success: function(response) {
-            console.log(response)
             var tbody = modal.find('#modal-body');
             tbody.empty();
             response.data.forEach(function(payment_form) {
