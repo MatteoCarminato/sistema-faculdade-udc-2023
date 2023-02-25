@@ -30,7 +30,9 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('countries', CountryController::class);
 Route::resource('payment_terms', PaymentTermController::class);
+
 Route::resource('payment_forms', PaymentFormController::class);
+Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->name('payment_forms.busca');
 
 
 require __DIR__.'/auth.php';

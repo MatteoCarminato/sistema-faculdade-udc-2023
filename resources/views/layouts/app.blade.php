@@ -22,16 +22,15 @@
     <link id="style" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- STYLE CSS -->
-     <link href="https://spruko.com/demo/sash/sash/assets/css/style.css" rel="stylesheet">
+     <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
 
 	<!-- Plugins CSS -->
-    <link href="https://spruko.com/demo/sash/sash/assets/css/plugins.css" rel="stylesheet">
+    <link href="{{ asset('/assets/css/plugins.css') }}" rel="stylesheet">
 
     <!--- FONT-ICONS CSS -->
-    <link href="https://spruko.com/demo/sash/sash/assets/css/icons.css" rel="stylesheet">
 
     <!-- INTERNAL Switcher css -->
-    <link href="https://spruko.com/demo/sash/sash/assets/switcher/css/switcher.css" rel="stylesheet">
+    <link href="{{ asset('/assets/switcher/css/switcher.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/switcher/demo.css') }}" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>

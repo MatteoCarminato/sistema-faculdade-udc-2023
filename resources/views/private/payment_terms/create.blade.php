@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+{{-- Modal --}}
+    @include('components.modal.modal_payment_form')
+{{-- Modal --}}
+
 @section('content')
 
 <!-- CONTAINER -->
@@ -74,15 +78,13 @@
                                     <div class="col-xl-3 col-md-3">
                                         <label>{{ __('Código Forma de Pagamento') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="forma_pagamento-input"> 
-                                            <button class="input-group-text"> 
-                                                <i class="fa fa-search"></i> 
-                                            </button> 
+                                            <input class="form-control" id="cod_forma_pagamento-input" readonly>  
+                                            <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_payment_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-3">
                                         <label>{{ __('Forma de Pagamento') }}</label>
-                                        <input type="number" class="form-control" id="forma_pagamento-input" readonly>
+                                        <input class="form-control" id="forma_pagamento-input" readonly>
                                     </div>
                                     <div class="col-xl-1 col-md-3">
                                         <button class="btn btn-primary" type="button" value="Salvar" onclick="changeBtnToCreate()" id="btnSalvar" style="margin-top: 42%;">Add</button>
@@ -95,50 +97,50 @@
                             </div>
                             <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
                                 <div class="table-responsive">
-                                            <table class="table border text-nowrap text-md-nowrap table-striped mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Position</th>
-                                                        <th>Salary</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Joan Powell</td>
-                                                        <td>Associate Developer</td>
-                                                        <td>$450,870</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Gavin Gibson</td>
-                                                        <td>Account manager</td>
-                                                        <td>$230,540</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Julian Kerr</td>
-                                                        <td>Senior Javascript Developer</td>
-                                                        <td>$55,300</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>Cedric Kelly</td>
-                                                        <td>Accountant</td>
-                                                        <td>$234,100</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>Samantha May</td>
-                                                        <td>Junior Technical Author</td>
-                                                        <td>$43,198</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-</div>  
+                                        <table class="table border text-nowrap text-md-nowrap table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Position</th>
+                                                    <th>Salary</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Joan Powell</td>
+                                                    <td>Associate Developer</td>
+                                                    <td>$450,870</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Gavin Gibson</td>
+                                                    <td>Account manager</td>
+                                                    <td>$230,540</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Julian Kerr</td>
+                                                    <td>Senior Javascript Developer</td>
+                                                    <td>$55,300</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Cedric Kelly</td>
+                                                    <td>Accountant</td>
+                                                    <td>$234,100</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Samantha May</td>
+                                                    <td>Junior Technical Author</td>
+                                                    <td>$43,198</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>  
                             <button class="btn btn-primary" type="submit">{{ __('Salvar') }}</button>
                         </form>
                     </div>
@@ -147,6 +149,7 @@
         </div>
     </div>
 </div>
-<!-- ROW CLOSED -->
-</div>
+
+
+
 @endsection

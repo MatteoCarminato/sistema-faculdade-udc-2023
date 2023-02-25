@@ -80,6 +80,14 @@ class PaymentFormController extends Controller
 
         return redirect()->route('payment_forms.index')->with('success', 'Forma de Pagamento excluído com sucesso.');
     }
+
+    public function buscar(Request $request)
+{
+    $payment_form = $request->input('search') ?? '';
+    $payment_form = PaymentForm::search($payment_form)->paginate(10);
+
+    return response()->json($payment_form);
+}
 }
 
 
