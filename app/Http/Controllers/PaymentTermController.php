@@ -41,11 +41,11 @@ class PaymentTermController extends Controller
             'juro' => 'required|numeric|min:0',
             'desconto' => 'required|numeric|min:0|max:100',
 
-            'parcelas' => 'required','array','json',
-            'parcelas.*.qnt' => 'required','numeric',
-            'parcelas.*.dias' => 'required','numeric',
-            'parcelas.*.porcentual' => 'required','numeric',
-            'parcelas.*.codFormaPagamento' => 'required','numeric'
+            'parcelas' => 'required',
+            'parcelas.*.qnt' => 'required|numeric',
+            'parcelas.*.dias' => 'required|numeric',
+            'parcelas.*.porcentual' => 'required|numeric',
+            'parcelas.*.codFormaPagamento' => 'required|numeric'
         ]);
 
         //Descobrir qnts de parcelas

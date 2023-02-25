@@ -29,12 +29,19 @@
                 <h3 class="card-title">{{ __('Cadastrar Condição de Pagamento') }}</h3>
             </div>
             <div class="card-body">
-                {{-- Alert Messages --}}
-                    @include('components.alert.alert')
-                {{-- Alert Messages --}}
+                    @error('parcelas')
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger mb-2" role="alert">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="fa fa-frown-o me-2" aria-hidden="true"></i>Cadastre ao menos uma parcela.
+                            </div>
+                        </div>
+                    </div>
+                    @enderror
                 <div class="row">
                     <div class="card-body">
-                        <form  method="POST" action="{{ route('payment_terms.store') }}" id="form-condicao-pagamento" class="needs-validation"  novalidate>
+                        <form  method="POST" action="{{ route('payment_terms.store') }}" id="form-condicao-pagamento" class="needs-validation @if($errors->all())('forma_pagamento') was-validated @endif" novalidate>
                         @csrf    
                             <div class="form-row">
                                 <div class="col-xl-2 mb-2">
@@ -44,18 +51,30 @@
                                 <div class="col-xl-7 mb-3">
                                     <label>{{ __('Condição de Pagamento') }}</label>
                                     <input type="text" class="form-control" id="condicao_pagamento" name="condicao_pagamento" value="{{old('condicao_pagamento')}}" required>
+                                    @error('condicao_pagamento')
+                                        <div class="invalid-feedback">{{ $message }}</div> 
+                                    @enderror
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Multa (sob. valor)') }}</label>
                                     <input  type="number" name="multa" id="input-multa" value="{{old('multa')}}" class="form-control" id="input-multa" required>
+                                    @error('multa')
+                                        <div class="invalid-feedback">{{ $message }}</div> 
+                                    @enderror
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Juros (a.m.)') }}</label>
-                                    <input type="number" class="form-control" name="juro" id="input-juros" value="{{old('juros')}}"required>
+                                    <input type="number" class="form-control" name="juro" id="input-juros" value="{{old('juro')}}"required>
+                                    @error('juro')
+                                        <div class="invalid-feedback">{{ $message }}</div> 
+                                    @enderror
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Desconto (sob. valor)') }}</label>
                                     <input type="number" class="form-control" name="desconto" id="input-desconto" value="{{old('desconto')}}"  required>
+                                    @error('desconto')
+                                        <div class="invalid-feedback">{{ $message }}</div> 
+                                    @enderror
                                 </div>
                             </div> 
                             <hr>
@@ -65,12 +84,12 @@
                             <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
                                     <div class="col-xl-2 col-md-3">
                                         <label>{{ __('Numero de Dias') }}</label>
-                                        <input type="numeric" id="id_dias" class="form-control" required>
+                                        <input type="numeric" id="id_dias" class="form-control-novalidate">
                                     </div>
                                     <div class="col-xl-2 col-md-3">
                                         <label>{{ __('Porcentual') }}</label>
                                         <div class="input-group"> 
-                                            <input type="numeric" id="id_porcentual"  class="form-control" required>
+                                            <input type="numeric" id="id_porcentual"  class="form-control">
                                             <button class="input-group-text"> % </button> 
                                         </div>
                                     </div>
@@ -85,8 +104,8 @@
                                         <label>{{ __('Forma de Pagamento') }}</label>
                                         <input class="form-control" id="forma_pagamento-input" readonly>
                                     </div>
-                                    <div class="col-xl-1 col-md-3">
-                                        <button class="btn btn-primary" type="button" value="Salvar" id="btnSalvar" style="margin-top: 42%;">Add</button>
+                                    <div class="col-xl-1">
+                                        <button class="btn btn-primary col-sm-12 col-md-12" type="button" value="Salvar" id="btnSalvar" style="margin-top: 28px;">Add</button>
                                     </div>
                             </div>
                             <div class="card-header" style="padding: 1rem; margin-left: -27px;">
@@ -210,4 +229,22 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<style>
+    .form-control-novalidate {
+    display: block;
+    width: 100%;
+    padding: 0.475rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4d5875;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e9edf4;
+    border-radius: 7px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+    </style>
 @endsection
