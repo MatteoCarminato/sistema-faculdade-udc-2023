@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-3">
-                                        <label>{{ __('Código de Pagamento') }}</label>
+                                        <label>{{ __('Código Forma de Pagamento') }}</label>
                                         <div class="input-group"> 
                                             <input class="form-control" id="forma_pagamento-input"> 
                                             <button class="input-group-text"> 

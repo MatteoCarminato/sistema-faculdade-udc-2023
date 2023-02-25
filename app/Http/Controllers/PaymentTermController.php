@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentTerm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PaymentTermController extends Controller
 {
@@ -36,10 +38,20 @@ class PaymentTermController extends Controller
             'desconto' => $request->get('desconto'),
             'qtd_parcelas' => $request->get('qtd_parcelas')
         ]);
-    
-        $paymentTerm->save();
-    
-        return redirect()->route('payment_terms.index')->with('success', 'Termo de pagamento criado com sucesso.');
+
+        DB::beginTransaction();
+        try {
+            $paymentTerm->save();
+            DB::commit();
+
+            return redirect()->route('payment_terms.index')->with('success', 'Condição de Pagamento criado com sucesso.');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::debug('Warning - Não foi possivel criar condição de pagamento: ' . $th);
+
+            return redirect()->route('payment_terms.index')->with('failed', 'Condição de Pagamento não foi criada.');
+        }
     }
 
     /**
@@ -59,7 +71,7 @@ class PaymentTermController extends Controller
     {
         $paymentTerm = PaymentTerm::find($paymentTerm);
 
-    return view('private.payment_terms.edit', compact('paymentTerm'));
+        return view('private.payment_terms.edit', compact('paymentTerm'));
     }
 
     /**
@@ -68,15 +80,15 @@ class PaymentTermController extends Controller
     public function update(Request $request, PaymentTerm $paymentTerm)
     {
         $paymentTerm = PaymentTerm::find($paymentTerm);
-    $paymentTerm->condicao_pagamento = $request->get('condicao_pagamento');
-    $paymentTerm->multa = $request->get('multa');
-    $paymentTerm->juro = $request->get('juro');
-    $paymentTerm->desconto = $request->get('desconto');
-    $paymentTerm->qtd_parcelas = $request->get('qtd_parcelas');
+        $paymentTerm->condicao_pagamento = $request->get('condicao_pagamento');
+        $paymentTerm->multa = $request->get('multa');
+        $paymentTerm->juro = $request->get('juro');
+        $paymentTerm->desconto = $request->get('desconto');
+        $paymentTerm->qtd_parcelas = $request->get('qtd_parcelas');
 
-    $paymentTerm->save();
+        $paymentTerm->save();
 
-    return redirect('/payment_terms')->with('success', 'Termo de pagamento atualizado com sucesso.');
+        return redirect('/payment_terms')->with('success', 'Condição de Pagamento atualizado com sucesso.');
     }
 
     /**
@@ -86,8 +98,8 @@ class PaymentTermController extends Controller
     {
         $paymentTerm = PaymentTerm::find($paymentTerm);
         $paymentTerm->delete();
-    
-        return redirect('/payment_terms')->with('success', 'Termo de pagamento excluído com sucesso.');
-    
+
+        return redirect('/payment_terms')->with('success', 'Condição de Pagamento excluído com sucesso.');
+
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentTermController;
+use App\Http\Controllers\PaymentFormController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountryController;
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('countries', CountryController::class);
 Route::resource('payment_terms', PaymentTermController::class);
+Route::resource('payment_forms', PaymentFormController::class);
+
 
 require __DIR__.'/auth.php';
 
