@@ -36,6 +36,13 @@
     <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>
 
     <link href="{{ asset('/assets/css/feather.css') }}" rel="stylesheet" type="text/css">
+
+    <style>
+        .card-footer nav .flex-1 {
+            display:none;
+        } 
+    </style>
+
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
@@ -55,8 +62,8 @@
                         </a>
                         <!-- LOGO -->
                         <div class="main-header-center ms-3 d-none d-lg-block">
-                            <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
-                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
+                            <!-- <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
+                            <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button> -->
                         </div>
                         <div class="d-flex order-lg-2 ms-auto header-right-icons">
                             <!-- SEARCH -->

@@ -56,6 +56,10 @@
                                     <form action="{{ route('payment_forms.destroy', $paymentForm->id) }}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <a class="btn btn-primary" href="{{ route('payment_forms.show', $paymentForm->id) }}" data-original-title="" title="">
+                                            <i class="material-icons">Ver</i>
+                                            <div class="ripple-container"></div>
+                                        </a>
                                         <a class="btn btn-warning" href="{{ route('payment_forms.edit', $paymentForm->id) }}" data-original-title="" title="">
                                             <i class="material-icons">Editar</i>
                                             <div class="ripple-container"></div>
@@ -73,8 +77,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                    {{ $payment_form->links() }}
-                </div>
+                {{ $payment_form->links() }}
+            </div>
         </div>
     </div>
 </div>

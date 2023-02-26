@@ -82,12 +82,12 @@ class PaymentFormController extends Controller
     }
 
     public function buscar(Request $request)
-{
-    $payment_form = $request->input('search') ?? '';
-    $payment_form = PaymentForm::search($payment_form)->paginate(10);
+    {
+        $payment_form = $request->input('search') ?? '';
+        $payment_form = PaymentForm::search($payment_form)->paginate(10);
 
-    return response()->json($payment_form);
-}
+        return response()->json($payment_form);
+    }
 }
 
 

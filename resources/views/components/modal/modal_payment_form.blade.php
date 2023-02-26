@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_payment_form">
-    <div class="modal-dialog modal-dialog-centered text-center modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
                 <h6 class="modal-title">{{ __('Selecione a Forma de Pagamento') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>

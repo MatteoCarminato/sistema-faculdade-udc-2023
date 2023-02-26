@@ -30,4 +30,9 @@ class PaymentTerm extends Model
             'condicao_pagamento' => $this->name
         ];
     }
+
+    public function installments()
+    {
+        return $this->hasMany(Installment::class);
+    }
 }

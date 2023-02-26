@@ -93,36 +93,31 @@ class PaymentTermController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PaymentTerm $paymentTerm)
+    public function show(PaymentTerm $payment_term)
     {
-        $paymentTerm = PaymentTerm::find($paymentTerm);
-
-        return view('private.payment_terms.show', compact('paymentTerm'));
+        return view('private.payment_terms.show', compact('payment_term'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PaymentTerm $paymentTerm)
+    public function edit(PaymentTerm $payment_term)
     {
-        $paymentTerm = PaymentTerm::find($paymentTerm);
-
-        return view('private.payment_terms.edit', compact('paymentTerm'));
+        return view('private.payment_terms.edit', compact('payment_term'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PaymentTerm $paymentTerm)
+    public function update(Request $request, PaymentTerm $payment_term)
     {
-        $paymentTerm = PaymentTerm::find($paymentTerm);
-        $paymentTerm->condicao_pagamento = $request->get('condicao_pagamento');
-        $paymentTerm->multa = $request->get('multa');
-        $paymentTerm->juro = $request->get('juro');
-        $paymentTerm->desconto = $request->get('desconto');
-        $paymentTerm->qtd_parcelas = $request->get('qtd_parcelas');
+        $payment_term->condicao_pagamento = $request->get('condicao_pagamento');
+        $payment_term->multa = $request->get('multa');
+        $payment_term->juro = $request->get('juro');
+        $payment_term->desconto = $request->get('desconto');
+        $payment_term->qtd_parcelas = $request->get('qtd_parcelas');
 
-        $paymentTerm->save();
+        $payment_term->save();
 
         return redirect('/payment_terms')->with('success', 'Condição de Pagamento atualizado com sucesso.');
     }
@@ -130,10 +125,9 @@ class PaymentTermController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaymentTerm $paymentTerm)
+    public function destroy(PaymentTerm $payment_term)
     {
-        $paymentTerm = PaymentTerm::find($paymentTerm);
-        $paymentTerm->delete();
+        $payment_term->delete();
 
         return redirect('/payment_terms')->with('success', 'Condição de Pagamento excluído com sucesso.');
 

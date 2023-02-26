@@ -50,31 +50,19 @@
                                 </div>
                                 <div class="col-xl-7 mb-3">
                                     <label>{{ __('Condição de Pagamento') }}</label>
-                                    <input type="text" class="form-control" id="condicao_pagamento" name="condicao_pagamento" value="{{old('condicao_pagamento')}}" required>
-                                    @error('condicao_pagamento')
-                                        <div class="invalid-feedback">{{ $message }}</div> 
-                                    @enderror
+                                    <input type="text" class="form-control" value="{{old('condicao_pagamento')}}">
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Multa (sob. valor)') }}</label>
-                                    <input  type="number" name="multa" id="input-multa" value="{{old('multa')}}" class="form-control" id="input-multa" required>
-                                    @error('multa')
-                                        <div class="invalid-feedback">{{ $message }}</div> 
-                                    @enderror
+                                    <input  type="number" value="{{old('multa')}}" class="form-control">
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Juros (a.m.)') }}</label>
-                                    <input type="number" class="form-control" name="juro" id="input-juros" value="{{old('juro')}}"required>
-                                    @error('juro')
-                                        <div class="invalid-feedback">{{ $message }}</div> 
-                                    @enderror
+                                    <input type="number" class="form-control" value="{{old('juro')}}">
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Desconto (sob. valor)') }}</label>
-                                    <input type="number" class="form-control" name="desconto" id="input-desconto" value="{{old('desconto')}}"  required>
-                                    @error('desconto')
-                                        <div class="invalid-feedback">{{ $message }}</div> 
-                                    @enderror
+                                    <input type="number" class="form-control" value="{{old('desconto')}}">
                                 </div>
                             </div> 
                             <hr>

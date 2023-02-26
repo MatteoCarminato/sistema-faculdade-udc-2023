@@ -56,6 +56,10 @@
                                     <form action="{{ route('payment_terms.destroy', $paymentTerm->id) }}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <a class="btn btn-primary" href="{{ route('payment_terms.show', $paymentTerm->id) }}" data-original-title="" title="">
+                                            <i class="material-icons">Ver</i>
+                                            <div class="ripple-container"></div>
+                                        </a>
                                         <a class="btn btn-warning" href="{{ route('payment_terms.edit', $paymentTerm->id) }}" data-original-title="" title="">
                                             <i class="material-icons">Editar</i>
                                             <div class="ripple-container"></div>
