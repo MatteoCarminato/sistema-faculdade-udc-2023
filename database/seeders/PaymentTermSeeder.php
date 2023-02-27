@@ -1,8 +1,12 @@
 <?php
-use App\Models\PaymentTerm;
-use Illuminate\Database\Seeder;
 
-class PaymentTermsTableSeeder extends Seeder
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\PaymentTerm;
+
+
+class PaymentTermSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +21,13 @@ class PaymentTermsTableSeeder extends Seeder
             'juro' => 0,
             'desconto' => 0,
             'qtd_parcelas' => 1,
+        ])->installments()->createMany([
+            [
+                'parcela' => 1,
+                'dias' => 0,
+                'porcentual' => 0,
+                'payment_form_id' => 1
+            ],
         ]);
 
         PaymentTerm::create([
@@ -25,6 +36,13 @@ class PaymentTermsTableSeeder extends Seeder
             'juro' => 1,
             'desconto' => 5,
             'qtd_parcelas' => 1,
+        ])->installments()->createMany([
+            [
+                'parcela' => 1,
+                'dias' => 30,
+                'porcentual' => 0,
+                'payment_form_id' => 1
+            ],
         ]);
 
         PaymentTerm::create([
@@ -33,6 +51,13 @@ class PaymentTermsTableSeeder extends Seeder
             'juro' => 2,
             'desconto' => 5,
             'qtd_parcelas' => 1,
+        ])->installments()->createMany([
+            [
+                'parcela' => 1,
+                'dias' => 60,
+                'porcentual' => 0,
+                'payment_form_id' => 2
+            ],
         ]);
     }
 }

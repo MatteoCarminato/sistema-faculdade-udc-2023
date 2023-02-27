@@ -60,10 +60,10 @@
                                             <i class="material-icons">Ver</i>
                                             <div class="ripple-container"></div>
                                         </a>
-                                        <a class="btn btn-warning" href="{{ route('payment_terms.edit', $paymentTerm->id) }}" data-original-title="" title="">
+                                        <button class="btn btn-warning" href="{{ route('payment_terms.edit', $paymentTerm->id) }}" data-original-title="" title="" disabled>
                                             <i class="material-icons">Editar</i>
                                             <div class="ripple-container"></div>
-                                        </a>
+                                        </button>
                                         <button type="button" class="btn btn-danger" onclick="confirm('{{ __("Voce tem certeza que deseja excluir?") }}') ? this.parentElement.submit() : ''">
                                             <i class="material-icons">Apagar</i>
                                             <div class="ripple-container"></div>

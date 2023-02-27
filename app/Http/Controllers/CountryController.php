@@ -7,9 +7,11 @@ use Illuminate\Validation\Rule;
 
 class CountryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $countries = Country::orderBy('name')->paginate(10);
+        $searchTerm = $request->input('search') ?? '';
+        $countries = Country::search($searchTerm)->orderBy('name')->paginate(10);
+
         return view('private.countries.index', compact('countries'));
     }
 
@@ -23,10 +25,10 @@ class CountryController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:countries,name',
             'slug' => 'required|unique:countries,slug',
-            'phone_code' => 'nullable|integer',
-            'flag' => 'nullable|image|max:1024',
+            'phone_code' => 'required|nullable|integer',
+            'flag' => 'nullable',
+            'acronym' => 'required|nullable|string|max:10',
         ]);
-
         if ($request->hasFile('flag')) {
             $data['flag'] = $request->file('flag')->store('public/flags');
         }
@@ -52,7 +54,8 @@ class CountryController extends Controller
             'name' => ['required', Rule::unique('countries')->ignore($country)],
             'slug' => ['required', Rule::unique('countries')->ignore($country)],
             'phone_code' => 'nullable|integer',
-            'flag' => 'nullable|image|max:1024',
+            'flag' => 'nullable',
+            'acronym' => 'nullable|string|max:10',
         ]);
 
         if ($request->hasFile('flag')) {
