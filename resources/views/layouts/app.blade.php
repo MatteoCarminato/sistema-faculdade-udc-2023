@@ -33,8 +33,6 @@
     <link href="{{ asset('/assets/switcher/css/switcher.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/switcher/demo.css') }}" rel="stylesheet">
 
-    <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>
-
     <link href="{{ asset('/assets/css/feather.css') }}" rel="stylesheet" type="text/css">
 
     <style>
@@ -192,8 +190,8 @@
 											<div class="tab-content">
 												<div class="tab-pane active" id="side1">
 													<ul class="sidemenu-list">
-                                                        <li><a href="cards.html" class="slide-item"> Listagem Estados</a></li>
-                                                        <li><a href="calendar.html" class="slide-item"> Cadastro Estado</a></li>
+                                                    <li><a href="{{route('states.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('states.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
 													</ul>
                                                 </div>
 											</div>
@@ -945,6 +943,8 @@
     <script src="{{ asset('/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
 
+
+    <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>
 
     <!-- INTERNAL INDEX JS -->
     <script src="{{ asset('/assets/js/index1.js') }}"></script>

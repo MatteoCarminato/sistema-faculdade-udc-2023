@@ -73,4 +73,12 @@ class CountryController extends Controller
 
         return redirect()->route('countries.index');
     }
+
+    public function buscar(Request $request)
+    {
+        $countries = $request->input('search') ?? '';
+        $countries = Country::search($countries)->paginate(10);
+
+        return response()->json($countries);
+    }
 }

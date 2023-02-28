@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountrySeeder::class,
             PaymentFormSeeder::class,
-            PaymentTermSeeder::class
+            PaymentTermSeeder::class,
+            StatesSeeder::class
         ]);
     }
 }
