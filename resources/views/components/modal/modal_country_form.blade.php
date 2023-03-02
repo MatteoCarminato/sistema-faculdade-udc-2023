@@ -76,8 +76,7 @@ $(document).ready(function() {
             data: {
                 search: $('#search-input').val()
             },
-            success: function(response) {
-                console.log('digiitei',response)
+             success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
                 response.data.forEach(function(countries) {
@@ -97,11 +96,11 @@ $(document).ready(function() {
 
     $(document).on('click', '.select-btn', function() {
         var countryId = $(this).data('value');
-        var countrName = $(this).data('name');
+        var countryName = $(this).data('name');
         
         
         $('#cod_country-input').val(countryId);
-        $('#name-country-input').val(countrName);
+        $('#name-country-input').val(countryName);
 
         $('#modal_country_form').modal('hide');
     });

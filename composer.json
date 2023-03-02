@@ -10,6 +10,8 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/scout": "^9.8",
+        "laravel/slack-notification-channel": "^2.5",
+        "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.12",
         "opcodesio/log-viewer": "^2.1"
@@ -54,7 +56,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

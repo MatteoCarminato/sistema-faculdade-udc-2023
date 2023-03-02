@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_payment_form">
+<div class="modal fade" id="modal_state_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Selecione a Forma de Pagamento') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Selecione o Estado') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
             <div class="card-body">
@@ -21,7 +21,7 @@
                 <div class="table-responsive">
                     <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                         <thead>
-                            <th>{{ __('Forma de Pagamento') }}</th> 
+                            <th>{{ __('Estado') }}</th> 
                             <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Selecionar') }}</th>
                         </thead>
                         <tbody id="modal-body">
@@ -41,18 +41,14 @@
     </div>
 </div>
 
-{{-- Modal --}}
-    @include('components.modal.modal_create_payment_form')
-{{-- Modal --}}
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script> 
 
 $(document).ready(function() {
-    $('#modal_payment_form').on('show.bs.modal', function(e) {
+    $('#modal_state_form').on('show.bs.modal', function(e) {
     var modal = $(this);
-    var url = "{{ route('payment_forms.busca') }}"
+    var url = "{{ route('states.busca') }}"
 
     // Fazer a primeira chamada sem nenhum valor no input
     $.ajax({
@@ -60,11 +56,11 @@ $(document).ready(function() {
         success: function(response) {
             var tbody = modal.find('#modal-body');
             tbody.empty();
-            response.data.forEach(function(payment_form) {
+            response.data.forEach(function(states) {
                 tbody.append(`<tr>
-                                <td>${payment_form.forma_pagamento}</td>
+                                <td>${states.name}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn" data-value="${payment_form.id}" data-name="${payment_form.forma_pagamento}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -83,11 +79,11 @@ $(document).ready(function() {
              success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
-                response.data.forEach(function(payment_form) {
+                response.data.forEach(function(states) {
                     tbody.append(`<tr>
-                                    <td>${payment_form.forma_pagamento}</td>
+                                    <td>${states.name}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn" data-value="${payment_form.id}" data-name="${payment_form.forma_pagamento}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -99,14 +95,14 @@ $(document).ready(function() {
 
 
     $(document).on('click', '.select-btn', function() {
-        var paymentFormId = $(this).data('value');
-        var paymentFormName = $(this).data('name');
+        var stateId = $(this).data('value');
+        var stateName = $(this).data('name');
         
         
-        $('#cod_forma_pagamento-input').val(paymentFormId);
-        $('#forma_pagamento-input').val(paymentFormName);
+        $('#cod_state-input').val(stateId);
+        $('#name-state-input').val(stateName);
 
-        $('#modal_payment_form').modal('hide');
+        $('#modal_state_form').modal('hide');
     });
 
 });

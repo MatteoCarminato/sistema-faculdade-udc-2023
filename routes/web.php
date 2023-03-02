@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\PaymentTermController;
 use App\Http\Controllers\PaymentFormController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,9 @@ Route::resource('countries', CountryController::class);
 Route::get('buscar/countries', [CountryController::class, 'buscar'])->name('countries.busca');
 
 Route::resource('states', StateController::class);
+Route::get('buscar/states', [StateController::class, 'buscar'])->name('states.busca');
+
+Route::resource('cities', CityController::class);
 
 Route::resource('payment_terms', PaymentTermController::class);
 
@@ -40,6 +44,7 @@ Route::resource('payment_forms', PaymentFormController::class);
 Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->name('payment_forms.busca');
 
 //log-viewer -> Rota para listar logs
+//http://127.0.0.1:8000/telescope/
 
 
 require __DIR__.'/auth.php';

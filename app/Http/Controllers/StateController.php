@@ -23,9 +23,9 @@ class StateController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique|max:255',
+            'name' => 'required|unique:states|max:255',
             'acronym' => 'nullable|max:10',
-            'slug' => 'nullable|unique|max:255',
+            'slug' => 'nullable|unique:states|max:255',
             'country_id' => 'required|exists:countries,id',
         ]);
 
@@ -63,5 +63,13 @@ class StateController extends Controller
         $state->delete();
 
         return redirect()->route('states.index')->with('success', 'Estado deletado com sucesso.');
+    }
+
+    public function buscar(Request $request)
+    {
+        $states = $request->input('search') ?? '';
+        $states = State::search($states)->paginate(10);
+
+        return response()->json($states);
     }
 }
