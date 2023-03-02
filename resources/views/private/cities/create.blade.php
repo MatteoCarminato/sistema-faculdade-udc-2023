@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-{{-- Modal --}}
-    @include('components.modal.modal_state_form')
-{{-- Modal --}}
 
 @section('content')
+
+{{-- Modal --}}
+@include('components.modal.modal_state_form')
+{{-- Modal --}}
+
 
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
