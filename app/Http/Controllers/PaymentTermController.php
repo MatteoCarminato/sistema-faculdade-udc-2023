@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Installment;
 use App\Models\PaymentTerm;
+use App\Rules\CheckArray;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -41,11 +42,7 @@ class PaymentTermController extends Controller
             'juro' => 'required|numeric|min:0',
             'desconto' => 'required|numeric|min:0|max:100',
 
-            'parcelas' => 'required',
-            'parcelas.*.qnt' => 'required|numeric',
-            'parcelas.*.dias' => 'required|numeric',
-            'parcelas.*.porcentual' => 'required|numeric',
-            'parcelas.*.codFormaPagamento' => 'required|numeric'
+            'parcelas' => new CheckArray,
         ]);
 
         //Descobrir qnts de parcelas
