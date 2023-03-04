@@ -53,7 +53,7 @@
                                 <td>{{ $state->name }}</td>
                                 <td>{{ $state->acronym }}</td>
                                 <td>{{ $state->slug }}</td>
-                                <td>{{ $state->name }}</td>
+                                <td>{{ $state->country->name }}</td>
                                 <td class="td-actions text-right">
                                     <form action="{{ route('states.destroy', $state->id) }}" method="post">
                                         @csrf

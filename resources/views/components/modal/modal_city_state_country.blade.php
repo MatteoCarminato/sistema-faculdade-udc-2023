@@ -1,3 +1,4 @@
+@include('components.modal.modal_create_country_form')
 <div class="modal fade" id="modal_country_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
@@ -55,11 +56,6 @@ $(document).ready(function() {
             response.data.forEach(function(countries) {
                 tbody.append(`<tr>
                                 <td>${countries.name}</td>
-                                <td>
-                                <button type="button" class="btn btn-primary select-btn" data-value="${countries.id}" data-name="${countries.name}" data-toggle="modal" data-target="#modal" >
-                                            Selecionar
-                                        </button>
-                                        </td>
                             </tr>`);
             });
         }

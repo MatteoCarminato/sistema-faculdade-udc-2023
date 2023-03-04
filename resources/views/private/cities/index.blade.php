@@ -42,18 +42,16 @@
                     <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                         <thead>
                             <th>{{ __('Cidades') }}</th>
-                            <th>{{ __('Sigla') }}</th>
                             <th>{{ __('Slug') }}</th>
-                            <th>{{ __('País')}}</th>
+                            <th>{{ __('Estado')}}</th>
                             <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Ações') }}</th>
                         </thead>
                         <tbody>
                             @foreach($cities as $city)
                             <tr>
                                 <td>{{ $city->name }}</td>
-                                <td>{{ $city->acronym }}</td>
                                 <td>{{ $city->slug }}</td>
-                                <td>{{ $city->name }}</td>
+                                <td>{{ $city->state->name }}</td>
                                 <td class="td-actions text-right">
                                     <form action="{{ route('cities.destroy', $city->id) }}" method="post">
                                         @csrf

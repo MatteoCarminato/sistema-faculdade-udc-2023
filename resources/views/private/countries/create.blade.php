@@ -66,7 +66,6 @@
                                         <label>{{ __('Logo') }}</label>
                                             
                                     <div class="col-md-12"> 
-                                        <!-- <input id="demo" type="file" name="flag" accept=".jpg, .png, image/jpeg, image/png" class="ff_fileupload_hidden"> -->
                                         <input type="file" name="flag" class="form-control" data-bs-height="180">
                                      </div>
                                         @error('name')

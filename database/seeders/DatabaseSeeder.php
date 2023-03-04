@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             PaymentFormSeeder::class,
             PaymentTermSeeder::class,
-            StatesSeeder::class
+            StatesSeeder::class,
+            CitiesSeeder::class
         ]);
     }
 }

@@ -63,14 +63,14 @@
                                     </div>
                                     
                                     <div class="col-xl-3 col-md-3">
-                                        <label>{{ __('Código Cidade') }}</label>
+                                        <label>{{ __('Código Estado') }}</label>
                                         <div class="input-group"> 
                                             <input class="form-control" id="cod_state-input" name="state_id" readonly>  
                                             <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_state_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-3">
-                                        <label>{{ __('Cidade') }}</label>
+                                        <label>{{ __('Estado') }}</label>
                                         <input class="form-control" id="name-state-input" readonly>
                                     </div>
                                 </div>

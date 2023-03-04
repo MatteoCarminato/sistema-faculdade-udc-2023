@@ -1,3 +1,7 @@
+{{-- Modal --}}
+@include('components.modal.modal_create_city_state_country')
+{{-- Modal --}}
+
 <div class="modal fade" id="modal_state_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
@@ -13,7 +17,7 @@
                         <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                     </div>
                     <div class="col-3 col-md-3">
-                    <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_payment_form"> Cadastrar </button>
+                    <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_country_form"> Cadastrar </button>
                     </div>
                 </div>
             </form>

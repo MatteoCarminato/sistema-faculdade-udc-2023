@@ -29,19 +29,21 @@
                 <h3 class="card-title">{{ __('Cadastrar Condição de Pagamento') }}</h3>
             </div>
             <div class="card-body">
-                    @error('parcelas')
-                    <div class="row">
-                        <div class="col-sm-12">
+            @if ($errors->any())
+                <div class="row">
+                    <div class="col-sm-12">
+                        @foreach ($errors->all() as $message)
                             <div class="alert alert-danger mb-2" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-frown-o me-2" aria-hidden="true"></i>Cadastre ao menos uma parcela.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+                                    <i class="fa fa-frown-o me-2" aria-hidden="true"></i>{{ $message }}
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @enderror
+                </div>
+            @endif
                 <div class="row">
                     <div class="card-body">
-                        <form  method="POST" action="{{ route('payment_terms.store') }}" id="form-condicao-pagamento" class="needs-validation @if($errors->all())('forma_pagamento') was-validated @endif" novalidate>
+                        <form  method="POST" action="{{ route('payment_terms.store') }}" id="form-condicao-pagamento">
                         @csrf    
                             <div class="form-row">
                                 <div class="col-xl-2 mb-2">
@@ -50,19 +52,22 @@
                                 </div>
                                 <div class="col-xl-7 mb-3">
                                     <label>{{ __('Condição de Pagamento') }}</label>
-                                    <input type="text" class="form-control" value="{{old('condicao_pagamento')}}">
+                                    <input type="text" class="form-control" name="condicao_pagamento" value="{{old('condicao_pagamento')}}">
+                                    @error('condicao_pagamento')
+                                            <div class="invalid-feedback">{{ $message }}</div> 
+                                        @enderror
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Multa (sob. valor)') }}</label>
-                                    <input  type="number" value="{{old('multa')}}" class="form-control">
+                                    <input  type="number" name="multa" value="{{old('multa')}}" class="form-control">
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Juros (a.m.)') }}</label>
-                                    <input type="number" class="form-control" value="{{old('juro')}}">
+                                    <input type="number" name="juro" class="form-control" value="{{old('juro')}}">
                                 </div>
                                 <div class="col-xl-4 mb-3">
                                     <label>{{ __('Desconto (sob. valor)') }}</label>
-                                    <input type="number" class="form-control" value="{{old('desconto')}}">
+                                    <input type="number" class="form-control" name="desconto" value="{{old('desconto')}}">
                                 </div>
                             </div> 
                             <hr>
@@ -78,7 +83,7 @@
                                         <label>{{ __('Porcentual') }}</label>
                                         <div class="input-group"> 
                                             <input type="numeric" id="id_porcentual"  class="form-control">
-                                            <button class="input-group-text"> % </button> 
+                                            <p class="input-group-text"> % </p> 
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-3">

@@ -190,7 +190,7 @@
 											<div class="tab-content">
 												<div class="tab-pane active" id="side1">
 													<ul class="sidemenu-list">
-                                                    <li><a href="{{route('states.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('states.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
                                                         <li><a href="{{route('states.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
 													</ul>
                                                 </div>
@@ -211,8 +211,8 @@
 											<div class="tab-content">
 												<div class="tab-pane active" id="side1">
 													<ul class="sidemenu-list">
-                                                        <li><a href="cards.html" class="slide-item"> Listagem Cidades</a></li>
-                                                        <li><a href="calendar.html" class="slide-item"> Cadastro Cidade</a></li>
+                                                    <li><a href="{{route('cities.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('cities.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
 													</ul>
                                                 </div>
 											</div>
@@ -856,8 +856,7 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                            class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Matteo Carminato</a>  </a> All rights reserved.
                     </div>
                 </div>
             </div>
