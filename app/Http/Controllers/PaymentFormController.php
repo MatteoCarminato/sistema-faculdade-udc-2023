@@ -10,16 +10,15 @@ class PaymentFormController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index(Request $request)
     {
         $searchTerm = $request->input('search') ?? '';
         $payment_form = PaymentForm::search($searchTerm)->paginate(10);
-        
+
         return view('private.payment_forms.index', compact('payment_form'));
     }
 
-   /**
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -57,7 +56,7 @@ class PaymentFormController extends Controller
         return view('private.payment_forms.edit', compact('payment_form'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, PaymentForm $payment_form)
@@ -89,5 +88,3 @@ class PaymentFormController extends Controller
         return response()->json($payment_form);
     }
 }
-
-

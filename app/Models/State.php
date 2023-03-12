@@ -15,14 +15,14 @@ class State extends Model
         'name',
         'acronym',
         'slug',
-        'country_id'
+        'country_id',
     ];
 
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function toSearchableArray()
@@ -31,7 +31,7 @@ class State extends Model
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'acronym' => $this->acronym
+            'acronym' => $this->acronym,
         ];
     }
 
@@ -39,5 +39,4 @@ class State extends Model
     {
         return $this->belongsTo(Country::class);
     }
-
 }

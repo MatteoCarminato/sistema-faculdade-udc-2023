@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\PaymentTerm;
-
+use Illuminate\Database\Seeder;
 
 class PaymentTermSeeder extends Seeder
 {
@@ -26,7 +25,7 @@ class PaymentTermSeeder extends Seeder
                 'parcela' => 1,
                 'dias' => 0,
                 'porcentual' => 0,
-                'payment_form_id' => 1
+                'payment_form_id' => 1,
             ],
         ]);
 
@@ -41,7 +40,7 @@ class PaymentTermSeeder extends Seeder
                 'parcela' => 1,
                 'dias' => 30,
                 'porcentual' => 0,
-                'payment_form_id' => 1
+                'payment_form_id' => 1,
             ],
         ]);
 
@@ -56,7 +55,7 @@ class PaymentTermSeeder extends Seeder
                 'parcela' => 1,
                 'dias' => 60,
                 'porcentual' => 0,
-                'payment_form_id' => 2
+                'payment_form_id' => 2,
             ],
         ]);
     }

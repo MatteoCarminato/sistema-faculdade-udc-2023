@@ -15,14 +15,14 @@ class City extends Model
         'name',
         'slug',
         'phone_code',
-        'state_id'
+        'state_id',
     ];
 
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function toSearchableArray()
@@ -38,5 +38,4 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
-
 }

@@ -23,7 +23,7 @@ class Country extends Model
         'id',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function toSearchableArray()
@@ -32,7 +32,7 @@ class Country extends Model
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'acronym' => $this->acronym
+            'acronym' => $this->acronym,
         ];
     }
 }

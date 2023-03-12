@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('acronym')->nullable();
             $table->string('slug')->nullable();
             $table->unsignedTinyInteger('country_id');
-            
+
             $table->timestamps();
             $table->softDeletes();
 

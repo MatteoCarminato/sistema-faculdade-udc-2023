@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Country;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class CountryController extends Controller

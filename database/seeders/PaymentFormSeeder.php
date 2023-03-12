@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\PaymentForm;
+use Illuminate\Database\Seeder;
 
 class PaymentFormSeeder extends Seeder
 {
@@ -15,15 +15,15 @@ class PaymentFormSeeder extends Seeder
     public function run()
     {
         PaymentForm::create([
-            'forma_pagamento' => 'Cartão de Crédito'
+            'forma_pagamento' => 'Cartão de Crédito',
         ]);
 
         PaymentForm::create([
-            'forma_pagamento' => 'Boleto Bancário'
+            'forma_pagamento' => 'Boleto Bancário',
         ]);
 
         PaymentForm::create([
-            'forma_pagamento' => 'Transferência Bancária'
+            'forma_pagamento' => 'Transferência Bancária',
         ]);
     }
 }

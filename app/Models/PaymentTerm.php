@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class PaymentTerm extends Model     
+class PaymentTerm extends Model
 {
-    use HasFactory;  
+    use HasFactory;
     use SoftDeletes;
     use Searchable;
 
@@ -18,7 +18,7 @@ class PaymentTerm extends Model
         'multa',
         'juro',
         'desconto',
-        'qtd_parcelas'
+        'qtd_parcelas',
     ];
 
     protected $dates = ['deleted_at'];
@@ -27,7 +27,7 @@ class PaymentTerm extends Model
     {
         return [
             'id' => $this->id,
-            'condicao_pagamento' => $this->name
+            'condicao_pagamento' => $this->name,
         ];
     }
 

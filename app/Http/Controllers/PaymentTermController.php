@@ -16,10 +16,9 @@ class PaymentTermController extends Controller
      */
     public function index(Request $request)
     {
-
         $searchTerm = $request->input('search') ?? '';
         $paymentTerms = PaymentTerm::search($searchTerm)->paginate(10);
-        
+
         return view('private.payment_terms.index', compact('paymentTerms'));
     }
 
@@ -50,13 +49,12 @@ class PaymentTermController extends Controller
         $installments = json_decode($decodeInstallments, true);
         $qntInstallments = count($installments);
 
-
         $paymentTerm = new PaymentTerm([
             'condicao_pagamento' => $validatedData['condicao_pagamento'],
             'multa' => $validatedData['multa'],
             'juro' => $validatedData['juro'],
             'desconto' => $validatedData['desconto'],
-            'qtd_parcelas' => $qntInstallments
+            'qtd_parcelas' => $qntInstallments,
         ]);
 
         DB::beginTransaction();
@@ -73,15 +71,14 @@ class PaymentTermController extends Controller
                 ]);
 
                 $installment->save();
-            };
+            }
 
             DB::commit();
 
             return redirect()->route('payment_terms.index')->with('success', 'Condição de Pagamento criado com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
-            Log::debug('Warning - Não foi possivel criar condição de pagamento: ' . $th);
+            Log::debug('Warning - Não foi possivel criar condição de pagamento: '.$th);
 
             return redirect()->route('payment_terms.index')->with('failed', 'Condição de Pagamento não foi criada.');
         }
@@ -127,6 +124,5 @@ class PaymentTermController extends Controller
         $payment_term->delete();
 
         return redirect('/payment_terms')->with('success', 'Condição de Pagamento excluído com sucesso.');
-
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Country;
+use Illuminate\Database\Seeder;
 
 class CountrySeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class CountrySeeder extends Seeder
             'acronym' => 'BR',
             'slug' => 'brasil',
             'phone_code' => 55,
-            'flag' => 'br.png'
+            'flag' => 'br.png',
         ]);
 
         Country::create([
@@ -27,7 +27,7 @@ class CountrySeeder extends Seeder
             'acronym' => 'EUA',
             'slug' => 'estados-unidos',
             'phone_code' => 1,
-            'flag' => 'us.png'
+            'flag' => 'us.png',
         ]);
 
         Country::create([
@@ -35,7 +35,7 @@ class CountrySeeder extends Seeder
             'acronym' => 'ARG',
             'slug' => 'argentina',
             'phone_code' => 54,
-            'flag' => 'ar.png'
+            'flag' => 'ar.png',
         ]);
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\CityController;
-use App\Http\Controllers\PaymentTermController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PaymentFormController;
+use App\Http\Controllers\PaymentTermController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StateController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CountryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +24,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 Route::resource('countries', CountryController::class);
 Route::get('buscar/countries', [CountryController::class, 'buscar'])->name('countries.busca');
@@ -46,6 +45,4 @@ Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->na
 //log-viewer -> Rota para listar logs
 //http://127.0.0.1:8000/telescope/
 
-
 require __DIR__.'/auth.php';
-

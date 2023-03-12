@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\PaymentTerm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -12,6 +12,7 @@ class Installment extends Model
     use SoftDeletes;
 
     protected $primaryKey = ['payment_term_id', 'payment_form_id'];
+
     public $incrementing = false;
 
     protected $fillable = ['payment_term_id', 'payment_form_id', 'parcela', 'dias', 'porcentual'];

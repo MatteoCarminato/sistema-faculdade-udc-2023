@@ -28,7 +28,7 @@ class PaymentForm extends Model
     {
         return [
             'id' => $this->id,
-            'forma_pagamento' => $this->name
+            'forma_pagamento' => $this->name,
         ];
     }
 }

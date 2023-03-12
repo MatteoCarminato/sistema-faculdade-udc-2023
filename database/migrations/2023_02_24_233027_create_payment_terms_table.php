@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('juro', 8, 2);
             $table->double('desconto', 8, 2);
             $table->integer('qtd_parcelas');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });
