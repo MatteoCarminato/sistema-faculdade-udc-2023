@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- Modal --}}
-@include('components.modal.modal_country_form')
+@include('components.modal.modal_state_form')
 {{-- Modal --}}
 
 
@@ -22,7 +22,9 @@
         </div>
     </div>
     <!-- PAGE-HEADER END -->
-
+    {{-- Alert Messages --}}
+        @include('components.alert.error-input')
+    {{-- Alert Messages --}}
     <!-- ROW OPEN -->
     <div class="row row-cards">
         <div class="col">
@@ -33,45 +35,45 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('states.update', $state->id) }}" enctype="multipart/form-data" class="needs-validation @if($errors->all()) was-validated @endif" novalidate>
+                            <form method="POST" action="{{ route('cities.update', $city->id) }}" enctype="multipart/form-data" >
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">
                                     <div class="col-xl-2 mb-2">
                                         <label for="cod_ref">{{ __('Código de Referência') }}</label>
-                                        <input class="form-control" readonly value="{{ $state->id }}" />
+                                        <input class="form-control" readonly value="{{ $city->id }}" />
                                     </div>
-                                    <div class="col-xl-4 mb-3">
+                                    <div class="col-xl-6 mb-3">
                                         <label>{{ __('Nome') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?: $state->name }}" required autofocus >
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?: $city->name }}" required autofocus >
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> 
                                         @enderror
                                     </div>
                                     <div class="col-xl-2 mb-3">
-                                        <label>{{ __('Sigla') }}</label>
-                                        <input type="text" class="form-control" id="acronym" name="acronym" value="{{ old('acronym') ?: $state->acronym }}" required >
-                                        @error('acronym')
-                                            <div class="invalid-feedback">{{ $message }}</div> 
-                                        @enderror
-                                    </div>
-                                    <div class="col-xl-2 mb-3">
                                         <label>{{ __('Slug') }}</label>
-                                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') ?: $state->slug }}" required >
+                                        <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') ?: $city->slug }}" required >
                                         @error('slug')
                                             <div class="invalid-feedback">{{ $message }}</div> 
                                         @enderror
                                     </div>
+                                    <div class="col-xl-2 mb-3">
+                                        <label>{{ __('DDD') }}</label>
+                                        <input type="text" class="form-control" id="phone_code" name="phone_code" value="{{ old('phone_code') ?: $city->phone_code }}" required >
+                                        @error('phone_code')
+                                            <div class="invalid-feedback">{{ $message }}</div> 
+                                        @enderror
+                                    </div>
                                     <div class="col-xl-3 col-md-3">
-                                        <label>{{ __('Código País') }}</label>
+                                        <label>{{ __('Código Estado') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="cod_country-input" name="country_id" value="{{ old('country_id') ?: $state->country_id }}" readonly>  
-                                            <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_country_form"> <i class="fa fa-search"></i> </button>
+                                            <input class="form-control" id="cod_state-input" name="state_id" value="{{ old('state_id') ?: $city->state_id }}" readonly>  
+                                            <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_state_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-3">
-                                        <label>{{ __('País') }}</label>
-                                        <input class="form-control" id="name-country-input" value="{{ $state->country->name }}" readonly>
+                                        <label>{{ __('Estado') }}</label>
+                                        <input class="form-control" id="name-state-input" value="{{ $city->state->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="card-footer">

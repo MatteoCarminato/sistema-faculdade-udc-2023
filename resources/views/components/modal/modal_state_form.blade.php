@@ -1,5 +1,5 @@
 {{-- Modal --}}
-@include('components.modal.modal_create_city_state_country')
+@include('components.modal.modal_city_create_state_form')
 {{-- Modal --}}
 
 <div class="modal fade" id="modal_state_form">
@@ -17,7 +17,7 @@
                         <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                     </div>
                     <div class="col-3 col-md-3">
-                    <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_country_form"> Cadastrar </button>
+                    <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_city_create_state_form"> Cadastrar </button>
                     </div>
                 </div>
             </form>
@@ -64,7 +64,7 @@ $(document).ready(function() {
                 tbody.append(`<tr>
                                 <td>${states.name}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-bs-dismiss="modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -87,7 +87,7 @@ $(document).ready(function() {
                     tbody.append(`<tr>
                                     <td>${states.name}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn" data-value="${states.id}" data-name="${states.name}" data-bs-dismiss="modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -106,7 +106,7 @@ $(document).ready(function() {
         $('#cod_state-input').val(stateId);
         $('#name-state-input').val(stateName);
 
-        $('#modal_state_form').modal('hide');
+        $('#modal_city_create_state_form').modal('hide');
     });
 
 });

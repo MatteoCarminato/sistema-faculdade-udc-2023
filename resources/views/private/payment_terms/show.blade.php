@@ -66,12 +66,12 @@
                                             </thead>
                                             <tbody>
                                             @foreach ($payment_term->installments as $installment)
-                                                <div>
+                                                <tr>
                                                     <td>{{ $installment->parcela }}</td>
                                                     <td>{{ $installment->dias }}</td>
                                                     <td>{{ $installment->porcentual }}</td>
                                                     <td>{{ $installment->paymentForm->forma_pagamento }}</td>
-                                                </div>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>

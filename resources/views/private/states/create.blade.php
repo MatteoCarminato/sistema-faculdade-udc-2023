@@ -21,6 +21,9 @@
         </div>
     </div>
     <!-- PAGE-HEADER END -->
+    {{-- Alert Messages --}}
+        @include('components.alert.error-input')
+    {{-- Alert Messages --}}
 
     <!-- ROW OPEN -->
     <div class="row row-cards">

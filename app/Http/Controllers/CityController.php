@@ -29,7 +29,6 @@ class CityController extends Controller
             'phone_code' => 'required|nullable|integer',
             'state_id' => 'required|exists:cities,id',
         ]);
-
         City::create($validatedData);
 
         return redirect()->route('cities.index')->with('success', 'Cidade criada com sucesso.');
