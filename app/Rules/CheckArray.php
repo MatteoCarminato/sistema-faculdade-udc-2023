@@ -21,7 +21,7 @@ class CheckArray implements ValidationRule
         }
 
         if (empty($decodedArray)) {
-            $fail('Adicione ao menos uma parcela.');
+            $fail("Adicione ao menos um(a) {$attribute}.");
         }
     }
 }

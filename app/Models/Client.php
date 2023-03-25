@@ -33,7 +33,8 @@ class Client extends Model
         'number',
         'complements',
         'district',
-        'active'
+        'active',
+        'parent_id',
     ];
 
     protected $dates = ['deleted_at'];
@@ -50,5 +51,9 @@ class Client extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+    public function parent()
+    {
+        return $this->hasMany(ParentChild::class, 'client_id');
     }
 }

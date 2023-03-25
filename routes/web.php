@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PaymentFormController;
 use App\Http\Controllers\PaymentTermController;
@@ -36,6 +37,11 @@ Route::resource('states', StateController::class);
 Route::get('buscar/states', [StateController::class, 'buscar'])->name('states.busca');
 
 Route::resource('cities', CityController::class);
+Route::get('buscar/cities', [CityController::class, 'buscar'])->name('cities.busca');
+
+
+Route::resource('clients', ClientController::class);
+Route::get('/parents', [ClientController::class, 'indexParent'])->name('parents.index');
 
 Route::resource('payment_terms', PaymentTermController::class);
 

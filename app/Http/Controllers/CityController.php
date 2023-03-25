@@ -64,4 +64,12 @@ class CityController extends Controller
 
         return redirect()->route('cities.index')->with('success', 'Cidade deletada com sucesso.');
     }
+
+    public function buscar(Request $request)
+    {
+        $states = $request->input('search') ?? '';
+        $states = City::search($states)->paginate(10);
+
+        return response()->json($states);
+    }
 }

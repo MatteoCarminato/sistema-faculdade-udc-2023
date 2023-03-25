@@ -22,25 +22,18 @@ return new class extends Migration
             $table->string('rg')->nullable();
             $table->string('cpf')->nullable();
             $table->string('sex')->nullable();
-
             $table->enum('type', ['aluno', 'responsavel'])->default('aluno');
             $table->enum('blood_types', ['a+','b+','o+','ab+','a-','b-','o-','ab-'])->nullable();
-
             $table->decimal('height', 5, 2)->nullable();
             $table->decimal('weight', 5, 2)->nullable();
-
             $table->string('school')->nullable();
             $table->enum('shift', ['manha', 'tarde', 'noite'])->nullable();
-
-
-
             $table->string('address')->nullable();
             $table->unsignedTinyInteger('city_id')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('number')->nullable();
             $table->string('complements')->nullable();
             $table->string('district')->nullable();
-
             $table->boolean('active')->default(true);
 
             $table->softDeletes();
@@ -49,7 +42,7 @@ return new class extends Migration
             $table->foreign('city_id')
             ->references('id')
             ->on('cities')
-            ->onDelete('cascade');
+            ->onDelete('cascade');    
 
         });
     }
