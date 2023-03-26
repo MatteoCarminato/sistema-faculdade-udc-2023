@@ -138,7 +138,7 @@ class ClientController extends Controller
     }
 
     public function update(Request $request, Client $client)
-{
+    {
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'nickname' => 'required|string|max:255',
@@ -164,6 +164,8 @@ class ClientController extends Controller
         'active' => 'nullable|boolean',
         'responsaveis' => 'nullable',
     ]);
+
+    $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
 
     $decodeInstallments = $validatedData['responsaveis'];
     $guardians = json_decode($decodeInstallments, true);
@@ -194,28 +196,33 @@ class ClientController extends Controller
     DB::beginTransaction();
     try {
         $client->update($instanciado);
-        
+
         if (!empty($guardians)){
-            foreach ($guardians as $index => $parents) {
-                $parent = new Client([
-                    'name' => $parents['name'],
-                    'phone' => $parents['phone'],
-                    'family' => $parents['family'],
-                    'type' => 'responsavel'
+
+            foreach ($guardians as $guardianData) {
+                $guardian = Client::updateOrCreate(['id' => $guardianData['id'] ?? null], [
+                    'name' => $guardianData['name'],
+                    'phone' => $guardianData['phone'],
+                    'type' => 'responsavel',
                 ]);
-                $parent->update();
+
+                ParentChild::updateOrCreate(
+                    ['client_id' => $client->id, 'parent_id' => $guardian->id],
+                    ['type' => $guardianData['family'], 'financial_guardian' => $guardianData['financial_guardian']]
+                );
+
+                $newParentIds[] = $guardian->id;
+            }
+
+            $deletedParentIds = array_diff($existingParentIds, $newParentIds);
+            if (!empty($deletedParentIds)) {
+                ParentChild::where('client_id', $client->id)
+                    ->whereIn('parent_id', $deletedParentIds)
+                    ->delete();
+            }
     
-                $parentChild = new ParentChild([
-                    'client_id' => $client->id,
-                    'parent_id' => $parent->id,
-                    'type' => $parents['family'],
-                    'financial_guardian' => $parents['financial_guardian']
-                ]);
-    
-                $parentChild->update();
-            }    
         }
-    
+
         DB::commit();
         if ( $client->type === 'responsavel'){
             return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');

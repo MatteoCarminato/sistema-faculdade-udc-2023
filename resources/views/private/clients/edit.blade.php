@@ -2,6 +2,10 @@
 
 @section('content')
 
+<!-- MODAL - LISTAR CIDADES -->
+@include('private.clients.modal.modal_city_form')
+<!-- MODAL - LISTAR CIDADES -->
+
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
 
@@ -170,13 +174,13 @@
                                     <div class="col-xl-3 mb-3">
                                         <label>{{ __('Código Cidade') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="cod_city-input" name="city_id" readonly>  
+                                            <input class="form-control" id="cod_city-input" name="city_id"  value="{{ old('city_id', $client->city_id) }}" readonly>  
                                             <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_city_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 mb-3">
                                         <label>{{ __('Cidade') }}</label>
-                                        <input class="form-control" id="name-city-input" readonly>
+                                        <input class="form-control" id="name-city-input" value="{{$client->city->name}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row @if ($client->type === 'responsavel') d-none @endif">
@@ -250,7 +254,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                @foreach($client->parent as $parent)
+                                                <tr>
+                                                    <td class="d-none">{{ $parent->parent->id }}</td>
+                                                    <td>{{ $parent->parent->name }}</td>
+                                                    <td>{{ $parent->parent->phone }}</td>
+                                                    <td>{{ $parent->type }}</td>
+                                                    <td>{{ $parent->parent->financial_guardian == 1 ? 'Sim' : 'Não' }} </td>
+                                                    <td><button class="btn btn-danger" data-index="{{ $parent->parent->id }}">Remover</button></td>
+                                                </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -278,9 +291,24 @@
                 // Array que irá guardar as informações da tabela
                 var tabelaItens = [];
 
+                $('#tblDados tbody tr').each(function(row, tr) {
+                        var id = $(tr).find('td:eq(0)').text();
+                        var name = $(tr).find('td:eq(1)').text();
+                        var phone = $(tr).find('td:eq(2)').text();
+                        var family = $(tr).find('td:eq(3)').text();
+                        var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
+
+                        tabelaItens.push({
+                            id:id,
+                            name: name,
+                            phone: phone,
+                            financial_guardian: financial_guardian,
+                            family: family
+                        });
+                    });
+
                 // Quando clicar no botão "Add"
                 $('#btnSalvar').on('click', function() {
-                    console.log("clickei")
                     // Obter os valores dos inputs
                     var name = $('#id_name').val();
                     var phone = $('#id_phone').val();
@@ -293,6 +321,7 @@
                         var rowCount = tabelaItens.length + 1;
 
                         tabelaItens.push({
+                            id:null,
                             name: name,
                             phone: phone,
                             family: family,
@@ -321,7 +350,7 @@
                     tabelaItens.forEach(function(item, index) {
                         tbody.append(`
                                         <tr>
-                                        <td class="d-none">${index + 1}</td>
+                                        <td class="d-none">${item.id ?? null}</td>
                                         <td>${item.name}</td>
                                         <td>${item.phone}</td>
                                         <td>${item.family}</td>
@@ -351,13 +380,13 @@
                 $('#btnSalvarForm').on('click', function() {
                     var data = [];
                     $('#tblDados tbody tr').each(function(row, tr) {
-                        var qnt = $(tr).find('td:eq(0)').text();
+                        var id = $(tr).find('td:eq(0)').text();
                         var name = $(tr).find('td:eq(1)').text();
                         var phone = $(tr).find('td:eq(2)').text();
                         var family = $(tr).find('td:eq(3)').text();
                         var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
                         data.push({
-                            qnt: qnt,
+                            id: id,
                             name: name,
                             phone: phone,
                             financial_guardian: financial_guardian,
