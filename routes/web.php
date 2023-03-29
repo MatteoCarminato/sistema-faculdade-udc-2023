@@ -42,6 +42,7 @@ Route::get('buscar/cities', [CityController::class, 'buscar'])->name('cities.bus
 
 Route::resource('clients', ClientController::class);
 Route::get('/parents', [ClientController::class, 'indexParent'])->name('parents.index');
+Route::delete('/parents/{client}', [ClientController::class, 'destroy'])->name('parents.destroy');
 
 Route::resource('payment_terms', PaymentTermController::class);
 

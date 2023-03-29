@@ -53,7 +53,7 @@
                                 <td>{{ $client->nickname }}</td>
                                 <td>{{ $client->phone }}</td>
                                 <td class="td-actions text-right">
-                                    <form action="{{ route('clients.destroy', $client->id) }}" method="post">
+                                    <form action="{{ route('parents.destroy', $client->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <a class="btn btn-primary" href="{{ route('clients.show', $client->id) }}" data-original-title="" title="">

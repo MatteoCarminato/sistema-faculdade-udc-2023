@@ -255,6 +255,9 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($client->parent as $parent)
+                                                @if ($parent->parent == null)
+                                                    @break
+                                                @else
                                                 <tr>
                                                     <td class="d-none">{{ $parent->parent->id }}</td>
                                                     <td>{{ $parent->parent->name }}</td>
@@ -263,6 +266,7 @@
                                                     <td>{{ $parent->parent->financial_guardian == 1 ? 'Sim' : 'Não' }} </td>
                                                     <td><button class="btn btn-danger" data-index="{{ $parent->parent->id }}">Remover</button></td>
                                                 </tr>
+                                                @endif
                                                 @endforeach
                                                 </tbody>
                                             </table>

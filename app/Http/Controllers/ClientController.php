@@ -24,7 +24,11 @@ class ClientController extends Controller
     {
 
         $searchTerm = $request->input('search') ?? '';
-        $clients = Client::search($searchTerm)->where('type','responsavel')->orderBy('name')->paginate(10);
+        $clients = Client::search($searchTerm)
+                        ->where('type','responsavel')
+                        ->where('deleted_at',null)
+                        ->orderBy('name')
+                        ->paginate(10);
 
         return view('private.clients.indexParent', compact('clients'));
     }
@@ -162,10 +166,11 @@ class ClientController extends Controller
         'complements' => 'nullable|string|max:255',
         'district' => 'nullable|string|max:255',
         'active' => 'nullable|boolean',
-        'responsaveis' => 'nullable',
+        'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
     ]);
 
     $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
+    $newParentIds=[];
 
     $decodeInstallments = $validatedData['responsaveis'];
     $guardians = json_decode($decodeInstallments, true);
@@ -196,9 +201,7 @@ class ClientController extends Controller
     DB::beginTransaction();
     try {
         $client->update($instanciado);
-
-        if (!empty($guardians)){
-
+       
             foreach ($guardians as $guardianData) {
                 $guardian = Client::updateOrCreate(['id' => $guardianData['id'] ?? null], [
                     'name' => $guardianData['name'],
@@ -215,13 +218,15 @@ class ClientController extends Controller
             }
 
             $deletedParentIds = array_diff($existingParentIds, $newParentIds);
+
             if (!empty($deletedParentIds)) {
                 ParentChild::where('client_id', $client->id)
                     ->whereIn('parent_id', $deletedParentIds)
                     ->delete();
+
+                Client::whereIn('id', $deletedParentIds)
+                    ->delete();
             }
-    
-        }
 
         DB::commit();
         if ( $client->type === 'responsavel'){
@@ -239,10 +244,10 @@ class ClientController extends Controller
 
 }
 
-public function destroy(Client $client)
-{
-    $client->delete();
+    public function destroy(Client $client)
+    {
+        $client->delete();
 
-    return redirect()->route('private.clients.index')->with('success', 'Cliente removido com sucesso.');
-}
+        return redirect()->route('parents.index')->with('success', 'Cliente removido com sucesso.');
+    }
 }
