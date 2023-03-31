@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PaymentTermSeeder::class,
             StatesSeeder::class,
             CitiesSeeder::class,
+            TeachersSeeder::class,
         ]);
     }
 }

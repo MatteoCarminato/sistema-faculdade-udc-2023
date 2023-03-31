@@ -192,6 +192,27 @@
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                 <i class="side-menu__icon feather-home"></i>
+                                        <span class="side-menu__label">Professor</span>
+                                    <i class="angle fe fe-chevron-left"></i>
+                                </a>
+								<ul class="slide-menu">
+									<li class="panel sidetab-menu">
+										<div class="panel-body tabs-menu-body p-0 border-0">
+											<div class="tab-content">
+												<div class="tab-pane active" id="side1">
+													<ul class="sidemenu-list">
+                                                        <li><a href="{{route('teachers.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{route('teachers.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
+													</ul>
+                                                </div>
+											</div>
+										</div>
+									</li>
+								</ul>
+                            </li>
+                            <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                                <i class="side-menu__icon feather-home"></i>
                                         <span class="side-menu__label">Países</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>

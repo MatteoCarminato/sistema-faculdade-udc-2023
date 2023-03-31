@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentFormController;
 use App\Http\Controllers\PaymentTermController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,8 @@ Route::resource('payment_terms', PaymentTermController::class);
 Route::resource('payment_forms', PaymentFormController::class);
 Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->name('payment_forms.busca');
 
+
+Route::resource('teachers', TeacherController::class);
 //log-viewer -> Rota para listar logs
 //http://127.0.0.1:8000/telescope/
 
