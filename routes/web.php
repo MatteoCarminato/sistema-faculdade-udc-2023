@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\LocalController;
+use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\PaymentFormController;
 use App\Http\Controllers\PaymentTermController;
 use App\Http\Controllers\ProfileController;
@@ -52,6 +55,11 @@ Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->na
 
 
 Route::resource('teachers', TeacherController::class);
+
+Route::resource('categories', CategoryController::class);
+Route::resource('modalities', ModalityController::class);
+Route::resource('locals', LocalController::class);
+
 //log-viewer -> Rota para listar logs
 //http://127.0.0.1:8000/telescope/
 
