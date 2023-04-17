@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LocalController;
 use App\Http\Controllers\ModalityController;
 use App\Http\Controllers\PaymentFormController;
@@ -55,10 +56,16 @@ Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->na
 
 
 Route::resource('teachers', TeacherController::class);
+Route::get('buscar/teachers', [TeacherController::class, 'buscar'])->name('teachers.busca');
 
 Route::resource('categories', CategoryController::class);
+Route::get('buscar/categories', [CategoryController::class, 'buscar'])->name('categories.busca');
+
 Route::resource('modalities', ModalityController::class);
+
 Route::resource('locals', LocalController::class);
+Route::get('buscar/locals', [LocalController::class, 'buscar'])->name('locals.busca');
+Route::resource('groups', GroupController::class);
 
 //log-viewer -> Rota para listar logs
 //http://127.0.0.1:8000/telescope/

@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             StatesSeeder::class,
             CitiesSeeder::class,
             TeachersSeeder::class,
+            LocalSeeder::class,
+            CategorySeeder::class,
+            ModalitySeeder::class,
+            GroupSeeder::class,
         ]);
     }
 }
