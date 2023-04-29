@@ -9,6 +9,12 @@
 @include('private.groups.modal.modal_category_form')
 @include('private.groups.modal.modal_create_category')
 
+@include('private.groups.modal.modal_locals_form')
+@include('private.groups.modal.modal_create_locals')
+
+@include('private.groups.modal.modal_modality_form')
+@include('private.groups.modal.modal_create_modality')
+
 {{-- Modal --}}
 
 
@@ -44,12 +50,32 @@
                                         <label for="cod_ref">{{ __('Código de Referência') }}</label>
                                         <input class="form-control" readonly />
                                     </div>
-                                    <div class="col-xl-10 mb-3">
+                                    <div class="col-xl-6 mb-3">
                                         <label>{{ __('Nome') }}</label>
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required autofocus >
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> 
                                         @enderror
+                                    </div>
+
+                                    <div class="col-xl-2 mb-2">
+                                        <label>{{ __('Semestre') }}</label>
+                                        <select name="semester" id="semester" class="form-select form-control">
+                                                <option value="1">Primeiro Semestre</option>
+                                                <option value="2">Segundo Semestre</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-xl-2 mb-2">
+                                        <label>{{ __('Ano') }}</label>
+                                        <select name="year" class="form-select form-control">
+                                            @php
+                                                $currentYear = \Carbon\Carbon::now()->year;
+                                                $nextYear = $currentYear + 1;
+                                            @endphp
+                                            <option value="{{ $currentYear }}">{{ $currentYear }}</option>
+                                            <option value="{{ $nextYear }}">{{ $nextYear }}</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-xl-2 mb-3">
@@ -91,15 +117,86 @@
                                     <div class="col-xl-2 mb-3">
                                         <label>{{ __('Código Modalidade') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="cod_modality-input" name="modality_id" readonly>  
-                                            <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_modality_form"> <i class="fa fa-search"></i> </button>
+                                            <input class="form-control" id="cod_modalities-input" name="modalities_id" readonly>  
+                                            <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_modalities_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-4 mb-3">
                                         <label>{{ __('Modalidade') }}</label>
-                                        <input class="form-control" id="name-modality-input" readonly>
+                                        <input class="form-control" id="name-modalities-input" readonly>
                                     </div>
                                 </div>
+                                <hr>
+                                    <div class="card-header" style="padding: 1rem; margin-left: -27px;">
+                                        <h3 class="card-title">Data e Hora </h3>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                                        <div class="col-xl-5 col-md-5">
+                                            <label>{{ __('Dia da semana') }}</label>
+                                            <select name="id_weekday" id="id_weekday" class="form-select form-control">
+                                                <option value="Segunda-feira">Segunda-feira</option>
+                                                <option value="Terça-feira">Terça-feira</option>
+                                                <option value="Quarta-feira">Quarta-feira</option>
+                                                <option value="Quinta-feira">Quinta-feira</option>
+                                                <option value="Sexta-feira">Sexta-feira</option>
+                                                <option value="Sábado">Sábado</option>
+                                                <option value="Domingo">Domingo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-5 col-md-5">
+                                            <label>{{ __('Hora do dia') }}</label>
+                                            <select name="id_hour" id="id_hour"  class="form-select form-control">
+                                                <option value="00:00">00:00</option>
+                                                <option value="01:00">01:00</option>
+                                                <option value="02:00">02:00</option>
+                                                <option value="03:00">03:00</option>
+                                                <option value="04:00">04:00</option>
+                                                <option value="05:00">05:00</option>
+                                                <option value="06:00">06:00</option>
+                                                <option value="07:00">07:00</option>
+                                                <option value="08:00">08:00</option>
+                                                <option value="09:00">09:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                                <option value="20:00">20:00</option>
+                                                <option value="21:00">21:00</option>
+                                                <option value="22:00">22:00</option>
+                                                <option value="23:00">23:00</option>
+                                            </select>
+                                    </div>
+
+                                        <div class="col-xl-1">
+                                            <button class="btn btn-primary col-sm-12 col-md-12" type="button"
+                                                value="Salvar" id="btnSalvar" style="margin-top: 28px;">Add</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-header" style="padding: 1rem; margin-left: -27px;">
+                                        <h3 class="card-title">Horarios</h3>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                                        <div class="table-responsive">
+                                            <table class="table border text-nowrap text-md-nowrap table-bordered mb-0"
+                                                id="tblDados">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Dia da Semana</th>
+                                                        <th>Hora</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-xl-11"></div>
@@ -116,4 +213,107 @@
         </div>
     </div>
 </div>
+
+
+<script>
+            $(document).ready(function() {
+                // Array que irá guardar as informações da tabela
+                var tabelaItens = [];
+
+                // Quando clicar no botão "Add"
+                $('#btnSalvar').on('click', function() {
+                    console.log("clickei")
+                    // Obter os valores dos inputs
+                    var weekday = $('#id_weekday').val();
+                    var hour = $('#id_hour').val();
+
+                    // Verificar se todos os campos estão preenchidos
+                    if (weekday && hour) {
+
+                        var index = tabelaItens.findIndex(function(item) {
+                            return item.weekday === weekday && item.hour === hour;
+                        });
+                        if (index !== -1) {
+                            alert('Essa combinação já existe');
+                            return;
+                        }
+
+                        // Adicionar um objeto com as informações na tabela
+                        var rowCount = tabelaItens.length + 1;
+
+                        tabelaItens.push({
+                            weekday: weekday,
+                            hour: hour,
+                        });
+
+                        // Limpar os valores dos inputs
+                        $('#id_weekday').val('');
+                        $('#id_hour').val('');
+
+                        $('#btnSalvarForm').prop("disabled", false);
+
+                        // Atualizar a tabela
+                        atualizarTabelaItens();
+                    } else {
+                        alert('Por favor, preencha todos os campos');
+                    }
+                });
+
+                // Função para atualizar a tabela de itens
+                function atualizarTabelaItens() {
+                    var tbody = $('#tblDados tbody');
+                    tbody.empty();
+                    tabelaItens.forEach(function(item, index) {
+                        tbody.append(`
+                                        <tr>
+                                        <td class="d-none">${index + 1}</td>
+                                        <td>${item.weekday}</td>
+                                        <td>${item.hour}</td>
+                                        <td><button class="btn btn-danger" data-index="${index}">Remover</button></td>
+                                        </tr>
+                                    `);
+                    });
+
+                    // Atualizar a quantidade de itens na tabela
+                    $('#qntItens').text(tabelaItens.length);
+                }
+
+                // Quando clicar no botão "Remover"
+                $('#tblDados').on('click', '.btn-danger', function() {
+                    // Obter o índice do item a ser removido
+                    var index = $(this).data('index');
+
+                    // Remover o item do array de itens
+                    tabelaItens.splice(index, 1);
+
+                    // Atualizar a tabela de itens
+                    atualizarTabelaItens();
+                });
+
+                $('#btnSalvarForm').on('click', function() {
+                    var data = [];
+                    $('#tblDados tbody tr').each(function(row, tr) {
+                        var qnt = $(tr).find('td:eq(0)').text();
+                        var weekday = $(tr).find('td:eq(1)').text();
+                        var hour = $(tr).find('td:eq(2)').text();
+                        var family = $(tr).find('td:eq(3)').text();
+                        var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
+                        data.push({
+                            qnt: qnt,
+                            weekday: weekday,
+                            hour: hour,
+                            financial_guardian: financial_guardian,
+                            family: family
+                        });
+                    });
+
+                    const inputResponsaveis = document.createElement('input');
+                    inputResponsaveis.type = 'hidden';
+                    inputResponsaveis.weekday = 'responsaveis';
+                    inputResponsaveis.value = JSON.stringify(data);
+                    document.querySelector('#form-clients').appendChild(inputResponsaveis);
+                });
+            });
+        </script>
+
 @endsection

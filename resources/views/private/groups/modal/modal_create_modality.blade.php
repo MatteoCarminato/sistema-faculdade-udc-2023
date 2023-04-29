@@ -1,12 +1,12 @@
-<div class="modal fade" id="modal_create_locals">
+<div class="modal fade" id="modal_create_modalities">
     <div class="modal-dialog modal-dialog-centered text-center modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Cadastrar Local') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Cadastrar Modalidade') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <form id="locals-form">
+                    <form id="modality-form">
                         @csrf
                         <div class="form-row">
                             <div class="col-xl-2 mb-2">
@@ -36,10 +36,11 @@
 
 <script> 
 $(document).ready(function () {
-    $('#locals-form').submit(function (event) {
+    console.log('aloo')
+    $('#modality-form').submit(function (event) {
         event.preventDefault(); // Previne o envio do formulário via HTML
         var form = $(this);
-        var url = "{{ route('locals.store') }}"
+        var url = "{{ route('modalities.store') }}"
         var formData = form.serialize();
         console.log('formData',formData)
         $.ajax({
@@ -48,13 +49,13 @@ $(document).ready(function () {
             data: formData,
             dataType: 'json',
             success: function (response) {
-                $('#modal_locals_form').modal('show');
+                $('#modal_modalities_form').modal('show');
             },
             error: function (xhr, status, error) {
-                $('#modal_locals_form').modal('show');
+                $('#modal_modalities_form').modal('show');
            }
         });
-        $('#modal_create_locals').modal('hide');
+        $('#modal_create_modalities').modal('hide');
     });
 });
     

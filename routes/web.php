@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
@@ -62,10 +63,22 @@ Route::resource('categories', CategoryController::class);
 Route::get('buscar/categories', [CategoryController::class, 'buscar'])->name('categories.busca');
 
 Route::resource('modalities', ModalityController::class);
+Route::get('buscar/modalities', [ModalityController::class, 'buscar'])->name('modalities.busca');
 
 Route::resource('locals', LocalController::class);
 Route::get('buscar/locals', [LocalController::class, 'buscar'])->name('locals.busca');
+
 Route::resource('groups', GroupController::class);
+
+
+Route::resource('calendar', CalendarController::class)->only(['index','edit','store']);
+Route::controller(CalendarController::class)->group(function () {
+    Route::get('getevents','getEvents')->name('calendar.getevents');
+    Route::put('update/events','updateEvents')->name('calendar.updateevents');
+    Route::post('resize/events','resizeEvents')->name('calendar.resizeevents');
+    Route::post('drop/events','dropEvents')->name('calendar.dropevents');
+});
+
 
 //log-viewer -> Rota para listar logs
 //http://127.0.0.1:8000/telescope/
