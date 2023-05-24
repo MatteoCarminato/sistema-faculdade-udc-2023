@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('weekday');
             $table->string('hour');
-            $table->integer('semester');
             $table->integer('year');
             $table->unsignedTinyInteger('teacher_id');
             $table->unsignedTinyInteger('locals_id');

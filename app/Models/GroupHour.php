@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-class Group extends Model
+class GroupHour extends Model
 {
     use HasFactory, SoftDeletes, Searchable;
 
-    protected $fillable = ['name', 'status', 'category_id', 'modality_id'];
+    protected $fillable = ['weekday', 'hour', 'year', 'teacher_id', 'locals_id', 'groups_id'];
 
     public function toSearchableArray()
     {
@@ -20,19 +20,19 @@ class Group extends Model
             'name' => $this->name,
           ];
     }
-    public function category()
+    public function teacher()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Teacher::class);
     }
 
-    public function modality()
+    public function locals()
     {
-        return $this->belongsTo(Modality::class);
+        return $this->belongsTo(Locals::class);
     }
 
-    public function groupHours()
+    public function group()
     {
-        return $this->hasMany(GroupHour::class, 'groups_id');
+        return $this->belongsTo(Group::class, 'groups_id');
     }
-
+    
 }

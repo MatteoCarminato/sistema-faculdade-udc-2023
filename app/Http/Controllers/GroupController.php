@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\GroupHour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class GroupController extends Controller
@@ -23,38 +26,119 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:groups|max:255'
+        // Validação dos dados do formulário para "groups"
+        $validatedGroupData = $request->validate([
+            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'modality_id' => 'required|numeric',
+            'locals_id' => 'required|numeric',
+            'year' => 'required',
+            'teacher_id' => 'required',
+            'groupHours' => ''
         ]);
-        Group::create($validatedData);
+        
+        $decodeGroupHours = $validatedGroupData['groupHours'];
+        $validatedGroupHourData = json_decode($decodeGroupHours, true);
+
+        // Criação de um novo grupo com os dados fornecidos
+        $group = Group::create([
+            'name' => $validatedGroupData['name'],
+            'category_id' => $validatedGroupData['category_id'],
+            'modality_id' => $validatedGroupData['modality_id'],
+        ]);
+
+        // Criação de um novo registro em "group_hours" associado ao grupo criado
+        foreach ($validatedGroupHourData as $validatedGroupHourDatas => $index) {
+
+            $groupHour = GroupHour::create([
+                'weekday' => $index['weekday'],
+                'hour' => $index['hour'],
+                'year' => $validatedGroupData['year'],
+                'teacher_id' => $validatedGroupData['teacher_id'],
+                'groups_id' => $group->id,
+                'locals_id' => $validatedGroupData['locals_id']
+            ]);
+            $groupHour->save();
+
+        }
 
         return redirect()->route('groups.index')->with('success', 'Group criada com sucesso.');
     }
 
-    public function show(Group $local)
+    public function show(Group $group)
     {
-        return view('private.groups.show', compact('local'));
+        return view('private.groups.show', compact('group'));
     }
 
-    public function edit(Group $local)
+    public function edit(Group $group)
     {
-        return view('private.groups.edit', compact('local'));
+        return view('private.groups.edit', compact('group'));
     }
 
-    public function update(Request $request, Group $local)
+    public function update(Request $request, Group $group)
     {
-        $data = $request->validate([
-            'name' => ['required', Rule::unique('groups')->ignore($local)]
+        dd($request);
+        // Validação dos dados do formulário
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'modality_id' => 'required|numeric',
+            'teacher_id' => 'required|numeric',
+            'locals_id' => 'required|numeric',
         ]);
 
-        $local->update($data);
+        $instanciadoGrup = [
+            'name' => $validatedData['name'],
+            'category_id' => $validatedData['category_id'],
+            'modality_id' => $validatedData['modality_id'],
+        ];
+
+        $existingGroupHourIds = $group->groupHours->pluck('groups_id')->toArray();
+        $newGroupHourIds = [];
+
+        $decodeGroupHour = $validatedData['groupHours'];
+        $groupHours = json_decode($decodeGroupHour, true);
+
+        DB::beginTransaction();
+        try {
+            $group->update($instanciadoGrup);
+
+            foreach ($groupHours as $groupHour) {
+                $groupData = GroupHour::updateOrCreate(['id' => $groupHour['id'] ?? null], [
+                    'weekday' => $groupHour['weekday'],
+                    'hour' => $groupHour['hour'],
+                    'year' => $groupHour['year'],
+                    'teacher_id' => $validatedData['teacher_id'],
+                    'locals_id' => $validatedData['locals_id'],
+                    'groups_id' => $group->id,
+                ]);
+
+                $newGroupHourIds[] = $groupData->id;
+            }
+
+            $deletedGroupHourIds = array_diff($existingGroupHourIds, $newGroupHourIds);
+
+            if (!empty($deletedParentIds)) {
+                GroupHour::whereIn('groups_id', $deletedGroupHourIds)
+                    ->delete();
+            }
+
+
+        } catch (\Illuminate\Database\QueryException $exception) {
+            DB::rollBack();
+            Log::debug('Warning - Não atualizou a Turma: ' . $exception);
+
+            return redirect()->route('groups.index')->with('failed', 'Informações não atualizada.');
+        }
+
+
 
         return redirect()->route('groups.index')->with('success', 'Group atualizada com sucesso.');
     }
 
-    public function destroy(Group $local)
+    public function destroy(Group $group)
     {
-        $local->delete();
+        $group->delete();
 
         return redirect()->route('groups.index')->with('success', 'Group deletada com sucesso.');
     }

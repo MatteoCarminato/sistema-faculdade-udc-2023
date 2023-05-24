@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('locals.store') }}" enctype="multipart/form-data" class="needs-validation @if($errors->all()) was-validated @endif" novalidate>
+                            <form method="POST" action="{{ route('groups.store') }}" enctype="multipart/form-data"  id="form-group">
                                 @csrf
                                 <div class="form-row">
                                     <div class="col-xl-2 mb-2">
@@ -56,14 +56,6 @@
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> 
                                         @enderror
-                                    </div>
-
-                                    <div class="col-xl-2 mb-2">
-                                        <label>{{ __('Semestre') }}</label>
-                                        <select name="semester" id="semester" class="form-select form-control">
-                                                <option value="1">Primeiro Semestre</option>
-                                                <option value="2">Segundo Semestre</option>
-                                        </select>
                                     </div>
 
                                     <div class="col-xl-2 mb-2">
@@ -105,7 +97,7 @@
                                     <div class="col-xl-2 mb-3">
                                         <label>{{ __('Código Local') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="cod_locals-input" name="local_id" readonly>  
+                                            <input class="form-control" id="cod_locals-input" name="locals_id" readonly>  
                                             <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_locals_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
@@ -117,7 +109,7 @@
                                     <div class="col-xl-2 mb-3">
                                         <label>{{ __('Código Modalidade') }}</label>
                                         <div class="input-group"> 
-                                            <input class="form-control" id="cod_modalities-input" name="modalities_id" readonly>  
+                                            <input class="form-control" id="cod_modalities-input" name="modality_id" readonly>  
                                             <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_modalities_form"> <i class="fa fa-search"></i> </button>
                                         </div>
                                     </div>
@@ -201,7 +193,7 @@
                                     <div class="row">
                                         <div class="col-xl-11"></div>
                                         <div class="col-xl-1">
-                                            <button type="submit" class="btn btn-primary">{{ __('Salvar') }}</button>
+                                            <button type="submit" id="btnSalvarForm" class="btn btn-primary">{{ __('Salvar') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -296,22 +288,18 @@
                         var qnt = $(tr).find('td:eq(0)').text();
                         var weekday = $(tr).find('td:eq(1)').text();
                         var hour = $(tr).find('td:eq(2)').text();
-                        var family = $(tr).find('td:eq(3)').text();
-                        var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
                         data.push({
                             qnt: qnt,
                             weekday: weekday,
-                            hour: hour,
-                            financial_guardian: financial_guardian,
-                            family: family
+                            hour: hour
                         });
                     });
-
-                    const inputResponsaveis = document.createElement('input');
-                    inputResponsaveis.type = 'hidden';
-                    inputResponsaveis.weekday = 'responsaveis';
-                    inputResponsaveis.value = JSON.stringify(data);
-                    document.querySelector('#form-clients').appendChild(inputResponsaveis);
+                    console.log('data', data)
+                    const groupHours = document.createElement('input');
+                    groupHours.type = 'hidden';
+                    groupHours.name = 'groupHours';
+                    groupHours.value = JSON.stringify(data);
+                    document.querySelector('#form-group').appendChild(groupHours);
                 });
             });
         </script>
