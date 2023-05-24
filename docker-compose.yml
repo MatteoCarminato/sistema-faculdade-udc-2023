@@ -1,18 +1,32 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
-services:
-    pgsql:
-        image: 'postgres:14'
-        ports:
-            - '5433:5432'
-        environment:
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD}'
-        volumes:
-            - './sourcefiles/postgres:/var/lib/postgresql/data'
-        healthcheck:
-            test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
-            retries: 3
-            timeout: 5s
+version: '3.8'
 
+services:
+#   app:
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: sistema-faculdade-udc
+#     ports:
+#       - "8000:80"
+#     volumes:
+#       - .:/var/www/html
+#     depends_on:
+#       - db
+
+  db:
+    image: 'postgres:14'
+    ports:
+      - "5433:5432"
+    environment:
+        POSTGRES_DB: '${DB_DATABASE}'
+        POSTGRES_USER: '${DB_USERNAME}'
+        POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+        retries: 3
+        timeout: 5s
+  
+volumes:
+  db_data:

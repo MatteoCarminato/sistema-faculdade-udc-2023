@@ -1,6 +1,6 @@
-# Gamification - Hubbie
+# Sistema Faculdade UDC 2023
 
-Sistema de Gamificação no turismo.
+Sistema de Gerenciamento de Escolinha.
 
 ## 🚀 Começando
 
@@ -10,7 +10,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 De que coisas você precisa para instalar o software e como instalá-lo?
 
-* PHP 8.1
+* PHP 8.1^
 * Docker & Docker Compose
 * Node ^18
 * Compose 2
@@ -30,53 +30,14 @@ Siga o passo-a-passo para rodar o projeto em seu ambiente de desenvolvimento em 
 **Clone o repositório**:
 
 ```
-git clone git@github.com:MatteoCarminato/gamification-tour.git
+git@github.com:MatteoCarminato/sistema-faculdade-udc-2023.git
 ```
 
 **Acesse a pasta do repositório e rode o comando para instalar o Laravel**:
 
 ```
-composer install
+./up.sh
 ```
-
-**Instale o Vite**:
-
-```
-npm install && npm run dev
-```
-
-**Crie o arquivo .env, digite no terminal**:
-
-```
-cp .env-local .env
-```
-
-**Suba o container do Postgresql**:
-
-```
-docker-compose up -d
-```
-
-**Rode a migration para criar as tabela do banco**:
-
-```
-php artisan migrate
-```
-
-**Rode o seeds para popular o banco**:
-
-```
- php artisan db:seed
-```
-
-**Agora se tudo aconteceu sem nenhum erro, rode o comando para subir o servidor**:
-
-```
-php artisan serve
-```
-
-Pronto agora é só acessar o http://localhost:8000. ( Não tem nada cadastrado)
-
 
 ## ⚙️ Executando os testes
 
