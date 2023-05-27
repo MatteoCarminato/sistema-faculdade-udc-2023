@@ -50,7 +50,7 @@
                                         <label for="cod_ref">{{ __('Código de Referência') }}</label>
                                         <input class="form-control" readonly />
                                     </div>
-                                    <div class="col-xl-6 mb-3">
+                                    <div class="col-xl-7 mb-3">
                                         <label>{{ __('Nome') }}</label>
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required autofocus >
                                         @error('name')
@@ -58,7 +58,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-xl-2 mb-2">
+                                    <div class="col-xl-3 mb-2">
                                         <label>{{ __('Ano') }}</label>
                                         <select name="year" class="form-select form-control">
                                             @php

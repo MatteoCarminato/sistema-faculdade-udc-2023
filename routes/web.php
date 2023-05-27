@@ -4,6 +4,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LocalController;
@@ -70,6 +71,7 @@ Route::get('buscar/locals', [LocalController::class, 'buscar'])->name('locals.bu
 
 Route::resource('groups', GroupController::class);
 
+Route::resource('contracts', ContractController::class);
 
 Route::resource('calendar', CalendarController::class)->only(['index','edit','store']);
 Route::controller(CalendarController::class)->group(function () {
