@@ -1,12 +1,12 @@
-<div class="modal fade" id="modal_create_teacher">
+<div class="modal fade" id="modal_create_responsavel">
     <div class="modal-dialog modal-dialog-centered text-center modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Cadastrar Professor') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Cadastrar Responsável') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <form id="teacher-form">
+                    <form id="responsavel-form">
                         @csrf
                         <div class="form-row">
                             <div class="col-xl-2 mb-2">
@@ -57,10 +57,10 @@
 
 <script> 
 $(document).ready(function () {
-    $('#teacher-form').submit(function (event) {
+    $('#responsavel-form').submit(function (event) {
         event.preventDefault(); // Previne o envio do formulário via HTML
         var form = $(this);
-        var url = "{{ route('teachers.store') }}"
+        var url = "{{ route('clients.store') }}"
         var formData = form.serialize();
         console.log('formData',formData)
         $.ajax({
@@ -69,13 +69,13 @@ $(document).ready(function () {
             data: formData,
             dataType: 'json',
             success: function (response) {
-                $('#modal_teacher_form').modal('show');
+                $('#modal_responsavel_form').modal('show');
             },
             error: function (xhr, status, error) {
-                $('#modal_teacher_form').modal('show');
+                $('#modal_responsavel_form').modal('show');
            }
         });
-        $('#modal_create_teacher').modal('hide');
+        $('#modal_create_responsavel').modal('hide');
     });
 });
     

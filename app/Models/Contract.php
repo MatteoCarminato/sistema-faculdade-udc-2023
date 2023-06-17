@@ -15,7 +15,7 @@ class Contract extends Model
         'client_id',
         'resp_id',
         'group_id',
-        'payment_form_id',
+        'payment_term_id',
         'status',
         'monthly_fee',
     ];
@@ -51,7 +51,7 @@ class Contract extends Model
 
     public function paymentForm()
     {
-        return $this->belongsTo(PaymentForm::class, 'payment_form_id');
+        return $this->belongsTo(PaymentTerm::class, 'payment_term_id');
     }
 
 }

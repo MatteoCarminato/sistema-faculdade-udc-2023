@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('resp_id');
             $table->unsignedInteger('group_id');
-            $table->unsignedInteger('payment_form_id');
+            $table->unsignedInteger('payment_term_id');
             $table->enum('status', ['pendente', 'confirmado', 'cancelado'])->default('pendente');
             $table->decimal('monthly_fee', 8, 2);
             
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('resp_id')->references('id')->on('clients');
             $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('payment_form_id')->references('id')->on('payment_forms');
+            $table->foreign('payment_term_id')->references('id')->on('payment_terms');
 
         });
     }

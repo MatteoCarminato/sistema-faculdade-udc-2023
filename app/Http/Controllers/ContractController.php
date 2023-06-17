@@ -11,7 +11,7 @@ class ContractController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->input('search') ?? '';
-        $contracts = Contract::search($searchTerm)->orderBy('name')->paginate(10);
+        $contracts = Contract::search($searchTerm)->orderBy('id')->paginate(10);
 
         return view('private.contracts.index', compact('contracts'));
     }
@@ -23,18 +23,28 @@ class ContractController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:contracts,name',
-            'slug' => 'required|unique:contracts,slug',
-            'phone_code' => 'required|nullable|integer',
-            'flag' => 'nullable',
-            'acronym' => 'required|nullable|string|max:10',
-        ]);
-        if ($request->hasFile('flag')) {
-            $data['flag'] = $request->file('flag')->store('public/flags');
-        }
 
-        $contract = Contract::create($data);
+        $data = $request->validate([
+            'monthly_fee' => 'nullable',
+            'clients_id' => 'nullable',
+            'responsavel_id' => 'nullable',
+            'groups_id' => 'nullable',
+            'payment_terms_id' => 'nullable',
+        ]);
+
+        $mensalidade = str_replace(['R$', '.'], '', $data['monthly_fee']);
+        $mensalidade = (float) $mensalidade;
+        $valor_mensalidade = number_format($mensalidade, 2, '.', '');
+
+        $contract = new Contract([
+            'monthly_fee' => $valor_mensalidade,
+            'client_id' => $data['clients_id'],
+            'resp_id' => $data['responsavel_id'],
+            'group_id' => $data['groups_id'],
+            'payment_term_id' => $data['payment_terms_id'],
+        ]);
+
+        $contract->save();
 
         return redirect()->route('contracts.show', $contract);
     }

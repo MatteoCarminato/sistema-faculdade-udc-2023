@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ModalitySeeder::class,
             GroupSeeder::class,
+            ClientSeeder::class
         ]);
     }
 }

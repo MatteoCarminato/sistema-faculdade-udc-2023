@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_teacher_form">
+<div class="modal fade" id="modal_clients_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Selecione o Professor') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Selecione o Aluno') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                                 <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                             </div>
                             <div class="col-3 col-md-3">
-                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_teacher"> Cadastrar </button>
+                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_clients"> Cadastrar </button>
                             </div>
                         </div>
                     </form>
@@ -20,7 +20,7 @@
                     <div class="table-responsive">
                         <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                             <thead>
-                                <th>{{ __('Professor') }}</th> 
+                                <th>{{ __('Alunos') }}</th> 
                                 <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Selecionar') }}</th>
                             </thead>
                             <tbody id="modal-body">
@@ -40,9 +40,9 @@
 <script> 
 
 $(document).ready(function() {
-    $('#modal_teacher_form').on('show.bs.modal', function(e) {
+    $('#modal_clients_form').on('show.bs.modal', function(e) {
     var modal = $(this);
-    var url = "{{ route('teachers.busca') }}"
+    var url = "{{ route('clients.busca') }}"
 
     // Fazer a primeira chamada sem nenhum valor no input
     $.ajax({
@@ -50,11 +50,11 @@ $(document).ready(function() {
         success: function(response) {
             var tbody = modal.find('#modal-body');
             tbody.empty();
-            response.data.forEach(function(teachers) {
+            response.data.forEach(function(clients) {
                 tbody.append(`<tr>
-                                <td>${teachers.name}</td>
+                                <td>${clients.name}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn-modal-teacher-form" data-value="${teachers.id}" data-name="${teachers.name}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn-modal-clients-form" data-value="${clients.id}" data-name="${clients.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -73,11 +73,11 @@ $(document).ready(function() {
              success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
-                response.data.forEach(function(teachers) {
+                response.data.forEach(function(clients) {
                     tbody.append(`<tr>
-                                    <td>${teachers.name}</td>
+                                    <td>${clients.name}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn-modal-teacher-form" data-value="${teachers.id}" data-name="${teachers.name}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn-modal-clients-form" data-value="${clients.id}" data-name="${clients.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -88,15 +88,15 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '.select-btn-modal-teacher-form', function() {
-        var teacherId = $(this).data('value');
-        var teacherName = $(this).data('name');
+    $(document).on('click', '.select-btn-modal-clients-form', function() {
+        var clientsId = $(this).data('value');
+        var clientsName = $(this).data('name');
         
         
-        $('#cod_teacher-input').val(teacherId);
-        $('#name-teacher-input').val(teacherName);
+        $('#cod_clients-input').val(clientsId);
+        $('#name-clients-input').val(clientsName);
 
-        $('#modal_teacher_form').modal('hide');
+        $('#modal_clients_form').modal('hide');
         $('#modal_create_state').modal('show');
     });
 

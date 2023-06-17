@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('layouts.blank');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -50,8 +54,11 @@ Route::get('buscar/cities', [CityController::class, 'buscar'])->name('cities.bus
 Route::resource('clients', ClientController::class);
 Route::get('/parents', [ClientController::class, 'indexParent'])->name('parents.index');
 Route::delete('/parents/{client}', [ClientController::class, 'destroy'])->name('parents.destroy');
+Route::get('buscar/clients', [ClientController::class, 'buscarAluno'])->name('clients.busca');
+Route::get('buscar/parents', [ClientController::class, 'buscarReponsavel'])->name('responsavel.busca');
 
 Route::resource('payment_terms', PaymentTermController::class);
+Route::get('buscar/payment_terms', [PaymentTermController::class, 'buscar'])->name('payment_terms.busca');
 
 Route::resource('payment_forms', PaymentFormController::class);
 Route::get('buscar/payment_forms', [PaymentFormController::class, 'buscar'])->name('payment_forms.busca');
@@ -70,6 +77,7 @@ Route::resource('locals', LocalController::class);
 Route::get('buscar/locals', [LocalController::class, 'buscar'])->name('locals.busca');
 
 Route::resource('groups', GroupController::class);
+Route::get('buscar/groups', [GroupController::class, 'buscar'])->name('groups.busca');
 
 Route::resource('contracts', ContractController::class);
 

@@ -15,7 +15,7 @@ class ClientController extends Controller
     {
 
         $searchTerm = $request->input('search') ?? '';
-        $clients = Client::search($searchTerm)->where('type','aluno')->orderBy('name')->paginate(10);
+        $clients = Client::search($searchTerm)->where('type', 'aluno')->orderBy('name')->paginate(10);
 
         return view('private.clients.index', compact('clients'));
     }
@@ -25,10 +25,10 @@ class ClientController extends Controller
 
         $searchTerm = $request->input('search') ?? '';
         $clients = Client::search($searchTerm)
-                        ->where('type','responsavel')
-                        ->where('deleted_at',null)
-                        ->orderBy('name')
-                        ->paginate(10);
+            ->where('type', 'responsavel')
+            ->where('deleted_at', null)
+            ->orderBy('name')
+            ->paginate(10);
 
         return view('private.clients.indexParent', compact('clients'));
     }
@@ -118,14 +118,14 @@ class ClientController extends Controller
 
             DB::commit();
 
-            if ( $client->type === 'responsavel'){
+            if ($client->type === 'responsavel') {
                 return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
-            }else{
+            } else {
                 return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
             }
-        }   catch (\Illuminate\Database\QueryException $exception) {
+        } catch (\Illuminate\Database\QueryException $exception) {
             DB::rollBack();
-            Log::debug('Warning - Não cadastrar o Client: '.$exception);
+            Log::debug('Warning - Não cadastrar o Client: ' . $exception);
 
             return redirect()->route('clients.index')->with('failed', 'Informações não cadastrada.');
         }
@@ -143,65 +143,65 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $client)
     {
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'nickname' => 'required|string|max:255',
-        'type' => 'required|in:aluno,responsavel',
-        'email' => 'nullable|email|unique:clients,email',
-        'phone' => 'nullable|string|max:20',
-        'phone_home' => 'nullable|string|max:20',
-        'birth_date' => 'nullable|date',
-        'rg' => 'nullable|string|max:20',
-        'cpf' => 'nullable|string|max:14',
-        'sex' => 'nullable|string|max:10',
-        'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
-        'height' => 'nullable|numeric|min:0|max:999.99',
-        'weight' => 'nullable|numeric|min:0|max:999.99',
-        'school' => 'nullable|string|max:255',
-        'shift' => 'nullable|in:manha,tarde,noite',
-        'address' => 'nullable|string|max:255',
-        'city_id' => 'nullable|exists:cities,id',
-        'zip_code' => 'nullable|string|max:10',
-        'number' => 'nullable|string|max:20',
-        'complements' => 'nullable|string|max:255',
-        'district' => 'nullable|string|max:255',
-        'active' => 'nullable|boolean',
-        'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
-    ]);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'nickname' => 'required|string|max:255',
+            'type' => 'required|in:aluno,responsavel',
+            'email' => 'nullable|email|unique:clients,email',
+            'phone' => 'nullable|string|max:20',
+            'phone_home' => 'nullable|string|max:20',
+            'birth_date' => 'nullable|date',
+            'rg' => 'nullable|string|max:20',
+            'cpf' => 'nullable|string|max:14',
+            'sex' => 'nullable|string|max:10',
+            'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
+            'height' => 'nullable|numeric|min:0|max:999.99',
+            'weight' => 'nullable|numeric|min:0|max:999.99',
+            'school' => 'nullable|string|max:255',
+            'shift' => 'nullable|in:manha,tarde,noite',
+            'address' => 'nullable|string|max:255',
+            'city_id' => 'nullable|exists:cities,id',
+            'zip_code' => 'nullable|string|max:10',
+            'number' => 'nullable|string|max:20',
+            'complements' => 'nullable|string|max:255',
+            'district' => 'nullable|string|max:255',
+            'active' => 'nullable|boolean',
+            'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
+        ]);
 
-    $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
-    $newParentIds=[];
+        $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
+        $newParentIds = [];
 
-    $decodeInstallments = $validatedData['responsaveis'];
-    $guardians = json_decode($decodeInstallments, true);
+        $decodeInstallments = $validatedData['responsaveis'];
+        $guardians = json_decode($decodeInstallments, true);
 
-    $instanciado = [
-        'name' => $validatedData['name'],
-        'nickname' => $validatedData['nickname'],
-        'type' => $validatedData['type'],
-        'email' => $validatedData['email'],
-        'phone' => $validatedData['phone'],
-        'phone_home' => $validatedData['phone_home'],
-        'birth_date' => $validatedData['birth_date'],
-        'rg' => $validatedData['rg'],
-        'cpf' => $validatedData['cpf'],
-        'sex' => $validatedData['sex'],
-        'blood_types' => $validatedData['blood_types'],
-        'height' => $validatedData['height'],
-        'weight' => $validatedData['weight'],
-        'school' => $validatedData['school'],
-        'shift' => $validatedData['shift'],
-        'address' => $validatedData['address'],
-        'city_id' => $validatedData['city_id'],
-        'zip_code' => $validatedData['zip_code'],
-        'number' => $validatedData['number'],
-        'complements' => $validatedData['complements'],
-        'district' => $validatedData['district'],
-    ];
-    DB::beginTransaction();
-    try {
-        $client->update($instanciado);
-       
+        $instanciado = [
+            'name' => $validatedData['name'],
+            'nickname' => $validatedData['nickname'],
+            'type' => $validatedData['type'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'phone_home' => $validatedData['phone_home'],
+            'birth_date' => $validatedData['birth_date'],
+            'rg' => $validatedData['rg'],
+            'cpf' => $validatedData['cpf'],
+            'sex' => $validatedData['sex'],
+            'blood_types' => $validatedData['blood_types'],
+            'height' => $validatedData['height'],
+            'weight' => $validatedData['weight'],
+            'school' => $validatedData['school'],
+            'shift' => $validatedData['shift'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'zip_code' => $validatedData['zip_code'],
+            'number' => $validatedData['number'],
+            'complements' => $validatedData['complements'],
+            'district' => $validatedData['district'],
+        ];
+        DB::beginTransaction();
+        try {
+            $client->update($instanciado);
+
             foreach ($guardians as $guardianData) {
                 $guardian = Client::updateOrCreate(['id' => $guardianData['id'] ?? null], [
                     'name' => $guardianData['name'],
@@ -228,26 +228,42 @@ class ClientController extends Controller
                     ->delete();
             }
 
-        DB::commit();
-        if ( $client->type === 'responsavel'){
-            return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
-        }else{
-            return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
+            DB::commit();
+            if ($client->type === 'responsavel') {
+                return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
+            } else {
+                return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
+            }
+
+        } catch (\Illuminate\Database\QueryException $exception) {
+            DB::rollBack();
+            Log::debug('Warning - Não cadastrar o Client: ' . $exception);
+
+            return redirect()->route('clients.index')->with('failed', 'Informações não atualizada.');
         }
-        
-    }   catch (\Illuminate\Database\QueryException $exception) {
-        DB::rollBack();
-        Log::debug('Warning - Não cadastrar o Client: '.$exception);
 
-        return redirect()->route('clients.index')->with('failed', 'Informações não atualizada.');
     }
-
-}
 
     public function destroy(Client $client)
     {
         $client->delete();
 
         return redirect()->route('parents.index')->with('success', 'Cliente removido com sucesso.');
+    }
+
+    public function buscarAluno(Request $request)
+    {
+        $clients = $request->input('search') ?? '';
+        $clients = Client::search($clients)->where('type', 'aluno')->paginate(10);
+
+        return response()->json($clients);
+    }
+
+    public function buscarReponsavel(Request $request)
+    {
+        $clients = $request->input('search') ?? '';
+        $clients = Client::search($clients)->where('type', 'responsavel')->paginate(10);
+
+        return response()->json($clients);
     }
 }

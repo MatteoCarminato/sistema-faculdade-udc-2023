@@ -145,9 +145,9 @@ class GroupController extends Controller
 
     public function buscar(Request $request)
     {
-        $states = $request->input('search') ?? '';
-        $states = Group::search($states)->paginate(10);
+        $groups = $request->input('search') ?? '';
+        $groups = Group::search($groups)->paginate(10);
 
-        return response()->json($states);
+        return response()->json($groups);
     }
 }

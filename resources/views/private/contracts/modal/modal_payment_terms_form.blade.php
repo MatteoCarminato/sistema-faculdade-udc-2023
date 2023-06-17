@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_locals_form">
+<div class="modal fade" id="modal_payment_terms_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Selecione Local') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Selecione a condição de pagamento') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                                 <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                             </div>
                             <div class="col-3 col-md-3">
-                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_locals"> Cadastrar </button>
+                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_payment_terms"> Cadastrar </button>
                             </div>
                         </div>
                     </form>
@@ -20,7 +20,7 @@
                     <div class="table-responsive">
                         <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                             <thead>
-                                <th>{{ __('Local') }}</th> 
+                                <th>{{ __('Condição de Pagamento') }}</th> 
                                 <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Selecionar') }}</th>
                             </thead>
                             <tbody id="modal-body">
@@ -40,9 +40,9 @@
 <script> 
 
 $(document).ready(function() {
-    $('#modal_locals_form').on('show.bs.modal', function(e) {
+    $('#modal_payment_terms_form').on('show.bs.modal', function(e) {
     var modal = $(this);
-    var url = "{{ route('locals.busca') }}"
+    var url = "{{ route('payment_terms.busca') }}"
 
     // Fazer a primeira chamada sem nenhum valor no input
     $.ajax({
@@ -50,11 +50,12 @@ $(document).ready(function() {
         success: function(response) {
             var tbody = modal.find('#modal-body');
             tbody.empty();
-            response.data.forEach(function(locals) {
+            response.data.forEach(function(payment_terms) {
+                console.log(payment_terms);
                 tbody.append(`<tr>
-                                <td>${locals.name}</td>
+                                <td>${payment_terms.condicao_pagamento}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn-modal-locals-form" data-value="${locals.id}" data-name="${locals.name}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn-modal-payment_terms-form" data-value="${payment_terms.id}" data-name="${payment_terms.condicao_pagamento}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -73,11 +74,11 @@ $(document).ready(function() {
              success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
-                response.data.forEach(function(locals) {
+                response.data.forEach(function(payment_terms) {
                     tbody.append(`<tr>
-                                    <td>${locals.name}</td>
+                                    <td>${payment_terms.condicao_pagamento}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn-modal-locals-form" data-value="${locals.id}" data-name="${locals.name}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn-modal-payment_terms-form" data-value="${payment_terms.id}" data-name="${payment_terms.condicao_pagamento}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -88,15 +89,15 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '.select-btn-modal-locals-form', function() {
-        var localsId = $(this).data('value');
-        var localsName = $(this).data('name');
+    $(document).on('click', '.select-btn-modal-payment_terms-form', function() {
+        var payment_termsId = $(this).data('value');
+        var payment_termsName = $(this).data('name');
         
         
-        $('#cod_locals-input').val(localsId);
-        $('#name-locals-input').val(localsName);
+        $('#cod_payment_terms-input').val(payment_termsId);
+        $('#name-payment_terms-input').val(payment_termsName);
 
-        $('#modal_locals_form').modal('hide');
+        $('#modal_payment_terms_form').modal('hide');
         $('#modal_create_state').modal('show');
     });
 

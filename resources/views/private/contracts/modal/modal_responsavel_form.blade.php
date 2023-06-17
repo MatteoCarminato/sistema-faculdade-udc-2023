@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_categories_form">
+<div class="modal fade" id="modal_responsavel_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Selecione Categoria') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Selecione o Responsavel') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                                 <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                             </div>
                             <div class="col-3 col-md-3">
-                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_categories"> Cadastrar </button>
+                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_responsavel"> Cadastrar </button>
                             </div>
                         </div>
                     </form>
@@ -20,7 +20,7 @@
                     <div class="table-responsive">
                         <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                             <thead>
-                                <th>{{ __('Categoria') }}</th> 
+                                <th>{{ __('Responsável') }}</th> 
                                 <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Selecionar') }}</th>
                             </thead>
                             <tbody id="modal-body">
@@ -40,9 +40,9 @@
 <script> 
 
 $(document).ready(function() {
-    $('#modal_categories_form').on('show.bs.modal', function(e) {
+    $('#modal_responsavel_form').on('show.bs.modal', function(e) {
     var modal = $(this);
-    var url = "{{ route('categories.busca') }}"
+    var url = "{{ route('responsavel.busca') }}"
 
     // Fazer a primeira chamada sem nenhum valor no input
     $.ajax({
@@ -50,11 +50,11 @@ $(document).ready(function() {
         success: function(response) {
             var tbody = modal.find('#modal-body');
             tbody.empty();
-            response.data.forEach(function(categories) {
+            response.data.forEach(function(responsavel) {
                 tbody.append(`<tr>
-                                <td>${categories.name}</td>
+                                <td>${responsavel.name}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn-modal-categories-form" data-value="${categories.id}" data-name="${categories.name}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn-modal-responsavel-form" data-value="${responsavel.id}" data-name="${responsavel.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -73,11 +73,11 @@ $(document).ready(function() {
              success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
-                response.data.forEach(function(categories) {
+                response.data.forEach(function(responsavel) {
                     tbody.append(`<tr>
-                                    <td>${categories.name}</td>
+                                    <td>${responsavel.name}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn-modal-categories-form" data-value="${categories.id}" data-name="${categories.name}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn-modal-responsavel-form" data-value="${responsavel.id}" data-name="${responsavel.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -88,15 +88,15 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '.select-btn-modal-categories-form', function() {
-        var categoriesId = $(this).data('value');
-        var categoriesName = $(this).data('name');
+    $(document).on('click', '.select-btn-modal-responsavel-form', function() {
+        var responsavelId = $(this).data('value');
+        var responsavelName = $(this).data('name');
         
         
-        $('#cod_categories-input').val(categoriesId);
-        $('#name-categories-input').val(categoriesName);
+        $('#cod_responsavel-input').val(responsavelId);
+        $('#name-responsavel-input').val(responsavelName);
 
-        $('#modal_categories_form').modal('hide');
+        $('#modal_responsavel_form').modal('hide');
         $('#modal_create_state').modal('show');
     });
 

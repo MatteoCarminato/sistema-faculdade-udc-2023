@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal_modalities_form">
+<div class="modal fade" id="modal_groups_form">
     <div class="modal-dialog modal-dialog-centered text-center modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">{{ __('Selecione Modalidade') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">{{ __('Selecione a Turma') }}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                                 <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                             </div>
                             <div class="col-3 col-md-3">
-                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_modalities"> Cadastrar </button>
+                                <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_groups"> Cadastrar </button>
                             </div>
                         </div>
                     </form>
@@ -20,7 +20,7 @@
                     <div class="table-responsive">
                         <table class="table border text-nowrap text-md-nowrap table-bordered mb-0" id="tableFormaPagamento">
                             <thead>
-                                <th>{{ __('Modalidade') }}</th> 
+                                <th>{{ __('Turma') }}</th> 
                                 <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Selecionar') }}</th>
                             </thead>
                             <tbody id="modal-body">
@@ -40,9 +40,9 @@
 <script> 
 
 $(document).ready(function() {
-    $('#modal_modalities_form').on('show.bs.modal', function(e) {
+    $('#modal_groups_form').on('show.bs.modal', function(e) {
     var modal = $(this);
-    var url = "{{ route('modalities.busca') }}"
+    var url = "{{ route('groups.busca') }}"
 
     // Fazer a primeira chamada sem nenhum valor no input
     $.ajax({
@@ -50,11 +50,11 @@ $(document).ready(function() {
         success: function(response) {
             var tbody = modal.find('#modal-body');
             tbody.empty();
-            response.data.forEach(function(modalities) {
+            response.data.forEach(function(groups) {
                 tbody.append(`<tr>
-                                <td>${modalities.name}</td>
+                                <td>${groups.name}</td>
                                 <td>
-                                <button type="button" class="btn btn-primary select-btn-modal-modalities-form" data-value="${modalities.id}" data-name="${modalities.name}" data-toggle="modal" data-target="#modal" >
+                                <button type="button" class="btn btn-primary select-btn-modal-groups-form" data-value="${groups.id}" data-name="${groups.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -73,11 +73,11 @@ $(document).ready(function() {
              success: function(response) {     
                 var tbody = modal.find('#modal-body');
                 tbody.empty();
-                response.data.forEach(function(modalities) {
+                response.data.forEach(function(groups) {
                     tbody.append(`<tr>
-                                    <td>${modalities.name}</td>
+                                    <td>${groups.name}</td>
                                     <td>
-                                     <button type="button" class="btn btn-primary select-btn-modal-modalities-form" data-value="${modalities.id}" data-name="${modalities.name}" data-toggle="modal" data-target="#modal" >
+                                     <button type="button" class="btn btn-primary select-btn-modal-groups-form" data-value="${groups.id}" data-name="${groups.name}" data-toggle="modal" data-target="#modal" >
                                             Selecionar
                                         </button>
                                         </td>
@@ -88,15 +88,16 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('click', '.select-btn-modal-modalities-form', function() {
-        var modalitiesId = $(this).data('value');
-        var modalitiesName = $(this).data('name');
+    $(document).on('click', '.select-btn-modal-groups-form', function() {
+        var groupsId = $(this).data('value');
+        var groupsName = $(this).data('name');
         
         
-        $('#cod_modalities-input').val(modalitiesId);
-        $('#name-modalities-input').val(modalitiesName);
+        $('#cod_groups-input').val(groupsId);
+        $('#name-groups-input').val(groupsName);
 
-        $('#modal_modalities_form').modal('hide');
+        $('#modal_groups_form').modal('hide');
+        $('#modal_create_state').modal('show');
     });
 
 });

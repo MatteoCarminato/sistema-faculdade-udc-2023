@@ -125,4 +125,12 @@ class PaymentTermController extends Controller
 
         return redirect('/payment_terms')->with('success', 'Condição de Pagamento excluído com sucesso.');
     }
+
+    public function buscar(Request $request)
+    {
+        $payment_term = $request->input('search') ?? '';
+        $payment_term = PaymentTerm::search($payment_term)->paginate(10);
+
+        return response()->json($payment_term);
+    }
 }

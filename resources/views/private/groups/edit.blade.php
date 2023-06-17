@@ -18,8 +18,6 @@
 
     <!-- CONTAINER -->
     <div class="main-container container-fluid">
-        php
-        Copy code
         <!-- PAGE-HEADER -->
         <div class="page-header">
             <h1 class="page-title">{{ __('Turma') }}</h1>
