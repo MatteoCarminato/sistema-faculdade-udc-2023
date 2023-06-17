@@ -22,9 +22,9 @@
     <link id="style" href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- STYLE CSS -->
-     <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
 
-	<!-- Plugins CSS -->
+    <!-- Plugins CSS -->
     <link href="{{ asset('/assets/css/plugins.css') }}" rel="stylesheet">
 
     <!--- FONT-ICONS CSS -->
@@ -35,17 +35,14 @@
 
     <link href="{{ asset('/assets/css/feather.css') }}" rel="stylesheet" type="text/css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
-    
-
     <style>
         .card-footer nav .flex-1 {
-            display:none;
-        } 
+            display: none;
+        }
     </style>
 
 </head>
+
 <body class="app sidebar-mini ltr light-mode">
     <!-- PAGE -->
     <div class="page">
@@ -55,11 +52,14 @@
             <div class="app-header header sticky">
                 <div class="container-fluid main-container">
                     <div class="d-flex">
-                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
+                            href="javascript:void(0)"></a>
                         <!-- sidebar-toggle-->
                         <a class="logo-horizontal " href="index.html">
-                            <img src="{{ asset('/assets/images/brand/logo-white.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="{{ asset('/assets/images/brand/logo-dark.png') }}" class="header-brand-img light-logo1" alt="logo">
+                            <img src="{{ asset('/assets/images/brand/logo-white.png') }}"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="{{ asset('/assets/images/brand/logo-dark.png') }}"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                         <div class="main-header-center ms-3 d-none d-lg-block">
@@ -78,7 +78,8 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                                     <div class="d-flex order-lg-2">
                                         <div class="dropdown d-lg-none d-flex">
-                                            <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
+                                            <a href="javascript:void(0)" class="nav-link icon"
+                                                data-bs-toggle="dropdown">
                                                 <i class="fe fe-search"></i>
                                             </a>
                                             <div class="dropdown-menu header-search dropdown-menu-start">
@@ -89,10 +90,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <!-- SIDE-MENU -->
                                         <div class="dropdown d-flex profile-1">
-                                            <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
+                                            <a href="javascript:void(0)" data-bs-toggle="dropdown"
+                                                class="nav-link leading-none d-flex">
                                                 <img src="{{ asset('/assets/images/users/21.jpg') }}" alt="profile-user"
                                                     class="avatar  profile-user brround cover-image">
                                             </a>
@@ -134,12 +136,14 @@
                 <div class="app-sidebar">
                     <div class="side-header">
                         <a class="header-brand1" href="index.html">
-                            <img src="{{ asset('/assets/images/brand/logo-white.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                            <img src="{{ asset('/assets/images/brand/icon-white.png') }}" class="header-brand-img toggle-logo"
-                                alt="logo">
-                            <img src="{{ asset('/assets/images/brand/icon-dark.png') }}" class="header-brand-img light-logo" alt="logo">
-                            <img src="{{ asset('/assets/images/brand/logo-dark.png') }}" class="header-brand-img light-logo1"
-                                alt="logo">
+                            <img src="{{ asset('/assets/images/brand/logo-white.png') }}"
+                                class="header-brand-img desktop-logo" alt="logo">
+                            <img src="{{ asset('/assets/images/brand/icon-white.png') }}"
+                                class="header-brand-img toggle-logo" alt="logo">
+                            <img src="{{ asset('/assets/images/brand/icon-dark.png') }}"
+                                class="header-brand-img light-logo" alt="logo">
+                            <img src="{{ asset('/assets/images/brand/logo-dark.png') }}"
+                                class="header-brand-img light-logo1" alt="logo">
                         </a>
                         <!-- LOGO -->
                     </div>
@@ -162,27 +166,30 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Alunos</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Alunos</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('clients.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('clients.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('clients.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('clients.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('parents.index')}}"><i
+                                <a class="side-menu__item has-link" data-bs-toggle="slide"
+                                    href="{{ route('parents.index') }}"><i
                                         class="side-menu__icon feather-home"></i><span
                                         class="side-menu__label">Responsavéis</span></a>
 
@@ -191,214 +198,234 @@
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Turma</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Turma</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('groups.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('groups.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('groups.index') }}" class="slide-item">
+                                                                {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('groups.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Professor</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Professor</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('teachers.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('teachers.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('teachers.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('teachers.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Categoria</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Categoria</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('categories.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('categories.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('categories.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('categories.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Local</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Local</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('locals.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('locals.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('locals.index') }}" class="slide-item">
+                                                                {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('locals.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Modalidade</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Modalidade</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('modalities.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('modalities.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('modalities.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('modalities.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
-                                <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Países</span>
+                                    <i class="side-menu__icon feather-home"></i>
+                                    <span class="side-menu__label">Países</span>
                                     <i class="angle fe fe-chevron-left"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('countries.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('countries.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('countries.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('countries.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Estados</span>
+                                    <span class="side-menu__label">Estados</span>
                                     <i class="angle fe fe-chevron-right"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('states.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('states.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('states.index') }}" class="slide-item">
+                                                                {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('states.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">Cidades</span>
+                                    <span class="side-menu__label">Cidades</span>
                                     <i class="angle fe fe-chevron-right"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                    <li><a href="{{route('cities.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('cities.create')}}" class="slide-item"> {{ __('Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('cities.index') }}" class="slide-item">
+                                                                {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('cities.create') }}"
+                                                                class="slide-item"> {{ __('Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">{{ __('Forma de Pagamento') }}</span>
+                                    <span class="side-menu__label">{{ __('Forma de Pagamento') }}</span>
                                     <i class="angle fe fe-chevron-right"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                        <li><a href="{{route('payment_forms.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('payment_forms.create')}}" class="slide-item"> {{ __(' Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('payment_forms.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('payment_forms.create') }}"
+                                                                class="slide-item"> {{ __(' Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <i class="side-menu__icon feather-home"></i>
-                                        <span class="side-menu__label">{{ __('Condição de Pagamento') }}</span>
+                                    <span class="side-menu__label">{{ __('Condição de Pagamento') }}</span>
                                     <i class="angle fe fe-chevron-right"></i>
                                 </a>
-								<ul class="slide-menu">
-									<li class="panel sidetab-menu">
-										<div class="panel-body tabs-menu-body p-0 border-0">
-											<div class="tab-content">
-												<div class="tab-pane active" id="side1">
-													<ul class="sidemenu-list">
-                                                    <li><a href="{{route('payment_terms.index')}}" class="slide-item"> {{ __('Listar') }}</a></li>
-                                                        <li><a href="{{route('payment_terms.create')}}" class="slide-item"> {{ __(' Cadastrar') }}</a></li>
-													</ul>
+                                <ul class="slide-menu">
+                                    <li class="panel sidetab-menu">
+                                        <div class="panel-body tabs-menu-body p-0 border-0">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="side1">
+                                                    <ul class="sidemenu-list">
+                                                        <li><a href="{{ route('payment_terms.index') }}"
+                                                                class="slide-item"> {{ __('Listar') }}</a></li>
+                                                        <li><a href="{{ route('payment_terms.create') }}"
+                                                                class="slide-item"> {{ __(' Cadastrar') }}</a></li>
+                                                    </ul>
                                                 </div>
-											</div>
-										</div>
-									</li>
-								</ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -434,8 +461,10 @@
                         <ul class="nav panel-tabs">
                             <li class=""><a href="#sidebar-side1" class="active" data-bs-toggle="tab"><i
                                         class="fe fe-settings me-1"></i>Feeds</a></li>
-                            <li><a href="#sidebar-side2" data-bs-toggle="tab"><i class="fe fe-message-circle me-1"></i> Chat</a></li>
-                            <li><a href="#sidebar-side3" data-bs-toggle="tab"><i class="fe fe-anchor me-1"></i>Timeline</a></li>
+                            <li><a href="#sidebar-side2" data-bs-toggle="tab"><i
+                                        class="fe fe-message-circle me-1"></i> Chat</a></li>
+                            <li><a href="#sidebar-side3" data-bs-toggle="tab"><i
+                                        class="fe fe-anchor me-1"></i>Timeline</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -452,7 +481,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">New user registered</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -468,7 +498,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">New order delivered</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -484,7 +515,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">You have pending tasks</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -500,7 +532,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">New version arrived</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -516,7 +549,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">Server #1 overloaded</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -532,7 +566,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">New project launched</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                     <a href="javascript:void(0)"><i class="fe fe-x"></i></a>
                                                 </div>
                                             </div>
@@ -552,7 +587,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">General Settings</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -567,7 +603,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">Map Settings</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -582,7 +619,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">Support Settings</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -597,7 +635,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">Payment Settings</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -612,7 +651,8 @@
                                             <div class="d-flex align-items-end justify-content-between ms-2">
                                                 <h6 class="">Notification Settings</h6>
                                                 <div>
-                                                    <a href="javascript:void(0)"><i class="fe fe-settings me-1"></i></a>
+                                                    <a href="javascript:void(0)"><i
+                                                            class="fe fe-settings me-1"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -824,12 +864,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">Task Finished<span
                                                 class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                        <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                                class="fw-semibold"> Project Management</a></p>
+                                        <p class="text-muted fs-12">Adam Berry finished task on<a
+                                                href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                        </p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                                 <li class="d-sm-flex">
@@ -837,12 +880,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">New Comment<span
                                                 class="text-muted fs-11 mx-2 fw-normal">05 July 2021</span></h6>
-                                        <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)"
-                                                class="fw-semibold"> AngularJS Template</a></p>
+                                        <p class="text-muted fs-12">Victoria commented on Project <a
+                                                href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                        </p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                                 <li class="d-sm-flex">
@@ -850,12 +896,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">New Comment<span
                                                 class="text-muted fs-11 mx-2 fw-normal">25 June 2021</span></h6>
-                                        <p class="text-muted fs-12">Victoria commented on Project <a href="javascript:void(0)"
-                                                class="fw-semibold"> AngularJS Template</a></p>
+                                        <p class="text-muted fs-12">Victoria commented on Project <a
+                                                href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a>
+                                        </p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                                 <li class="d-sm-flex">
@@ -863,12 +912,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">Task Overdue<span
                                                 class="text-muted fs-11 mx-2 fw-normal">14 June 2021</span></h6>
-                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)"
-                                                class="fw-semibold"> Integrated management</a></p>
+                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
+                                                href="javascript:void(0)" class="fw-semibold"> Integrated
+                                                management</a></p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                                 <li class="d-sm-flex">
@@ -876,12 +928,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">Task Overdue<span
                                                 class="text-muted fs-11 mx-2 fw-normal">29 June 2021</span></h6>
-                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a href="javascript:void(0)"
-                                                class="fw-semibold"> Integrated management</a></p>
+                                        <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
+                                                href="javascript:void(0)" class="fw-semibold"> Integrated
+                                                management</a></p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                                 <li class="d-sm-flex">
@@ -889,12 +944,15 @@
                                         <i class="task-icon1"></i>
                                         <h6 class="fw-semibold">Task Finished<span
                                                 class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span></h6>
-                                        <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                                class="fw-semibold"> Project Management</a></p>
+                                        <p class="text-muted fs-12">Adam Berry finished task on<a
+                                                href="javascript:void(0)" class="fw-semibold"> Project Management</a>
+                                        </p>
                                     </div>
                                     <div class="ms-auto d-md-flex me-3">
-                                        <a href="javascript:void(0)" class="text-muted me-2"><span class="fe fe-edit"></span></a>
-                                        <a href="javascript:void(0)" class="text-muted"><span class="fe fe-trash-2"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted me-2"><span
+                                                class="fe fe-edit"></span></a>
+                                        <a href="javascript:void(0)" class="text-muted"><span
+                                                class="fe fe-trash-2"></span></a>
                                     </div>
                                 </li>
                             </ul>
@@ -917,69 +975,72 @@
                         <ul class="row p-3">
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block active">
-                                    <span class="country-selector"><img alt="" src="{{ asset('/assets/images/flags-img/us_flag.jpg') }}"
+                                    <span class="country-selector"><img alt=""
+                                            src="{{ asset('/assets/images/flags-img/us_flag.jpg') }}"
                                             class="me-3 language"></span>USA
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/italy_flag.jpg') }}"
-                                        class="me-3 language"></span>Italy
+                                            src="{{ asset('/assets/images/flags-img/italy_flag.jpg') }}"
+                                            class="me-3 language"></span>Italy
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/spain_flag.jpg') }}"
-                                        class="me-3 language"></span>Spain
+                                            src="{{ asset('/assets/images/flags-img/spain_flag.jpg') }}"
+                                            class="me-3 language"></span>Spain
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/india_flag.jpg') }}"
-                                        class="me-3 language"></span>India
+                                            src="{{ asset('/assets/images/flags-img/india_flag.jpg') }}"
+                                            class="me-3 language"></span>India
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/french_flag.jpg') }}"
-                                        class="me-3 language"></span>French
+                                            src="{{ asset('/assets/images/flags-img/french_flag.jpg') }}"
+                                            class="me-3 language"></span>French
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/russia_flag.jpg') }}"
-                                        class="me-3 language"></span>Russia
+                                            src="{{ asset('/assets/images/flags-img/russia_flag.jpg') }}"
+                                            class="me-3 language"></span>Russia
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/germany_flag.jpg') }}"
-                                        class="me-3 language"></span>Germany
+                                            src="{{ asset('/assets/images/flags-img/germany_flag.jpg') }}"
+                                            class="me-3 language"></span>Germany
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
                                     <span class="country-selector"><img alt=""
-                                        src="{{ asset('/assets/images/flags-img/argentina.jpg') }}"
-                                        class="me-3 language"></span>Argentina
+                                            src="{{ asset('/assets/images/flags-img/argentina.jpg') }}"
+                                            class="me-3 language"></span>Argentina
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                    <span class="country-selector"><img alt="" src="{{ asset('/assets/images/flags-img/malaysia.jpg') }}"
-                                        class="me-3 language"></span>Malaysia
+                                    <span class="country-selector"><img alt=""
+                                            src="{{ asset('/assets/images/flags-img/malaysia.jpg') }}"
+                                            class="me-3 language"></span>Malaysia
                                 </a>
                             </li>
                             <li class="col-lg-6 mb-2">
                                 <a href="javascript:void(0)" class="btn btn-country btn-lg btn-block">
-                                    <span class="country-selector"><img alt="" src="{{ asset('/assets/images/flags-img/turkey.jpg') }}"
-                                        class="me-3 language"></span>Turkey
+                                    <span class="country-selector"><img alt=""
+                                            src="{{ asset('/assets/images/flags-img/turkey.jpg') }}"
+                                            class="me-3 language"></span>Turkey
                                 </a>
                             </li>
                         </ul>
@@ -994,112 +1055,120 @@
             <div class="container">
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-md-12 col-sm-12 text-center">
-                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Matteo Carminato</a>  </a> All rights reserved.
+                        Copyright © <span id="year"></span> <a href="javascript:void(0)">Matteo Carminato</a>
+                        </a> All rights reserved.
                     </div>
                 </div>
             </div>
         </footer>
         <!-- FOOTER END -->
 
-    <!-- BACK-TO-TOP -->
-    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+        <!-- BACK-TO-TOP -->
+        <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-    <!-- JQUERY JS -->
-    <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
+        <!-- JQUERY JS -->
+        <script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
 
-    <!-- BOOTSTRAP JS -->
-    <script src="{{ asset('/assets/plugins/bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- BOOTSTRAP JS -->
+        <script src="{{ asset('/assets/plugins/bootstrap/js/popper.min.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-    <!-- INPUT MASK JS-->
-    <script src="{{ asset('/assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
+        <!-- INPUT MASK JS-->
+        <script src="{{ asset('/assets/plugins/input-mask/jquery.mask.min.js') }}"></script>
 
-    <!-- SPARKLINE JS-->
-    <script src="{{ asset('/assets/js/jquery.sparkline.min.js') }}"></script>
+        <!-- SPARKLINE JS-->
+        <script src="{{ asset('/assets/js/jquery.sparkline.min.js') }}"></script>
 
-    <!-- Sticky js -->
-    <script src="{{ asset('/assets/js/sticky.js') }}"></script>
+        <!-- Sticky js -->
+        <script src="{{ asset('/assets/js/sticky.js') }}"></script>
 
-    <!-- CHART-CIRCLE JS-->
-    <script src="{{ asset('/assets/js/circle-progress.min.js') }}"></script>
+        <!-- CHART-CIRCLE JS-->
+        <script src="{{ asset('/assets/js/circle-progress.min.js') }}"></script>
 
-    <!-- PIETY CHART JS-->
-    <script src="{{ asset('/assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/peitychart/peitychart.init.js') }}"></script>
+        <!-- PIETY CHART JS-->
+        <script src="{{ asset('/assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/peitychart/peitychart.init.js') }}"></script>
 
-    <!-- SIDEBAR JS -->
-    <script src="{{ asset('/assets/plugins/sidebar/sidebar.js') }}"></script>
+        <!-- SIDEBAR JS -->
+        <script src="{{ asset('/assets/plugins/sidebar/sidebar.js') }}"></script>
 
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="{{ asset('/assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/p-scroll/pscroll.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/p-scroll/pscroll-1.js') }}"></script>
+        <!-- Perfect SCROLLBAR JS-->
+        {{-- <script src="{{ asset('/assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script> --}}
+        {{-- <script src="{{ asset('/assets/plugins/p-scroll/pscroll.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/p-scroll/pscroll-1.js') }}"></script> --}}
 
-    <!-- INTERNAL CHARTJS CHART JS-->
-    <script src="{{ asset('/assets/plugins/chart/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/chart/utils.js') }}"></script>
+        <!-- INTERNAL CHARTJS CHART JS-->
+        <script src="{{ asset('/assets/plugins/chart/Chart.bundle.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/chart/utils.js') }}"></script>
 
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
+        <!-- INTERNAL SELECT2 JS -->
+        <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
 
-    <!-- INTERNAL Data tables js-->
-    <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+        <!-- INTERNAL Data tables js-->
+        <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
 
-    <!-- INTERNAL APEXCHART JS -->
-    <script src="{{ asset('/assets/js/apexcharts.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/apexchart/irregular-data-series.js') }}"></script>
+        <!-- INTERNAL APEXCHART JS -->
+        <script src="{{ asset('/assets/js/apexcharts.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/apexchart/irregular-data-series.js') }}"></script>
 
-    <!-- INTERNAL Flot JS -->
-    <script src="{{ asset('/assets/plugins/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/flot/chart.flot.sampledata.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/flot/dashboard.sampledata.js') }}"></script>
+        <!-- INTERNAL Flot JS -->
+        <script src="{{ asset('/assets/plugins/flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/flot/chart.flot.sampledata.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/flot/dashboard.sampledata.js') }}"></script>
 
-    <!-- INTERNAL Vector js -->
-    <script src="{{ asset('/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+        <!-- INTERNAL Vector js -->
+        <script src="{{ asset('/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
 
-    <!-- SIDE-MENU JS-->
-    <script src="{{ asset('/assets/plugins/sidemenu/sidemenu.js') }}"></script>
+        <!-- SIDE-MENU JS-->
+        <script src="{{ asset('/assets/plugins/sidemenu/sidemenu.js') }}"></script>
 
-	<!-- TypeHead js -->
-	<script src="{{ asset('/assets/plugins/bootstrap5-typehead/autocomplete.js') }}"></script>
-    <script src="{{ asset('/assets/js/typehead.js') }}"></script>
+        <!-- TypeHead js -->
+        <script src="{{ asset('/assets/plugins/bootstrap5-typehead/autocomplete.js') }}"></script>
+        <script src="{{ asset('/assets/js/typehead.js') }}"></script>
 
-    <!-- INTERNAL WYSIWYG Editor JS -->
-    <script src="{{ asset('/assets/plugins/wysiwyag/jquery.richtext.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/wysiwyag/wysiwyag.js') }}"></script>
+        <!-- INTERNAL WYSIWYG Editor JS -->
+        <script src="{{ asset('/assets/plugins/wysiwyag/jquery.richtext.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/wysiwyag/wysiwyag.js') }}"></script>
 
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="{{ asset('/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+        <!-- INTERNAL File-Uploads Js-->
+        <script src="{{ asset('/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+        <script src="{{ asset('/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
 
 
-    <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/e629f2c11a.js" crossorigin="anonymous"></script>
 
-    <!-- INTERNAL INDEX JS -->
-    <script src="{{ asset('/assets/js/index1.js') }}"></script>
+        <!-- INTERNAL INDEX JS -->
+        <script src="{{ asset('/assets/js/index1.js') }}"></script>
 
-    <!-- Color Theme js -->
-    <script src="{{ asset('/assets/js/themeColors.js') }}"></script>
+        <!-- Color Theme js -->
+        <script src="{{ asset('/assets/js/themeColors.js') }}"></script>
 
-    <!-- CUSTOM JS -->
-    <script src="{{ asset('/assets/js/custom.js') }}"></script>
+        <!-- CUSTOM JS -->
+        <script src="{{ asset('/assets/js/custom.js') }}"></script>
 
-    <!-- Custom-switcher -->
-    <script src="{{ asset('/assets/js/custom-swicher.js') }}"></script>
+        <!-- Custom-switcher -->
+        <script src="{{ asset('/assets/js/custom-swicher.js') }}"></script>
 
-    <!-- Switcher js -->
-    <script src="{{ asset('/assets/switcher/js/switcher.js') }}"></script>
+        <!-- Switcher js -->
+        <script src="{{ asset('/assets/switcher/js/switcher.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                Inputmask().mask(document.querySelectorAll("[data-inputmask]"));
+            });
+        </script> --}}
+
 
 </body>
 

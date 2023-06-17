@@ -42,7 +42,6 @@
                     <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
                         <thead>
                             <th>{{ __('Nome') }}</th>
-                            <th>{{ __('Apelido') }}</th>
                             <th>{{ __('Celular') }}</th>
                             <th class="text-right sorting_asc_disabled sorting_desc_disabled">{{ __('Ações') }}</th>
                         </thead>
@@ -50,7 +49,6 @@
                             @foreach($clients as $client)
                             <tr>
                                 <td>{{ $client->name }}</td>
-                                <td>{{ $client->nickname }}</td>
                                 <td>{{ $client->phone }}</td>
                                 <td class="td-actions text-right">
                                     <form action="{{ route('parents.destroy', $client->id) }}" method="post">

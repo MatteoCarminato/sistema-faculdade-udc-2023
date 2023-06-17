@@ -47,10 +47,10 @@ class ClientController extends Controller
             'email' => 'nullable|email|unique:clients,email',
             'phone' => 'nullable|string|max:20',
             'phone_home' => 'nullable|string|max:20',
-            'birth_date' => 'nullable|date',
+            'birth_date' => 'nullable|date|before_or_equal:today',
             'rg' => 'nullable|string|max:20',
             'cpf' => 'nullable|string|max:14',
-            'sex' => 'nullable|string|max:10',
+            'sex' => 'required| in:masculino,feminino',
             'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
             'height' => 'nullable|numeric|min:0|max:999.99',
             'weight' => 'nullable|numeric|min:0|max:999.99',
@@ -102,6 +102,7 @@ class ClientController extends Controller
                     'name' => $parents['name'],
                     'phone' => $parents['phone'],
                     'family' => $parents['family'],
+                    'cpf' => $parents['cpf'],
                     'type' => 'responsavel'
                 ]);
                 $parent->save();
@@ -109,8 +110,7 @@ class ClientController extends Controller
                 $parentChild = new ParentChild([
                     'client_id' => $client->id,
                     'parent_id' => $parent->id,
-                    'type' => $parents['family'],
-                    'financial_guardian' => $parents['financial_guardian']
+                    'type' => $parents['family']
                 ]);
 
                 $parentChild->save();
@@ -150,10 +150,10 @@ class ClientController extends Controller
             'email' => 'nullable|email|unique:clients,email',
             'phone' => 'nullable|string|max:20',
             'phone_home' => 'nullable|string|max:20',
-            'birth_date' => 'nullable|date',
+            'birth_date' => 'nullable|date|before_or_equal:today',
             'rg' => 'nullable|string|max:20',
             'cpf' => 'nullable|string|max:14',
-            'sex' => 'nullable|string|max:10',
+            'sex' => 'required| in:masculino,feminino',
             'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
             'height' => 'nullable|numeric|min:0|max:999.99',
             'weight' => 'nullable|numeric|min:0|max:999.99',
@@ -211,7 +211,7 @@ class ClientController extends Controller
 
                 ParentChild::updateOrCreate(
                     ['client_id' => $client->id, 'parent_id' => $guardian->id],
-                    ['type' => $guardianData['family'], 'financial_guardian' => $guardianData['financial_guardian']]
+                    ['type' => $guardianData['family']]
                 );
 
                 $newParentIds[] = $guardian->id;

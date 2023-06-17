@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('clients');
             $table->foreignId('parent_id')->constrained('clients');
             $table->string('type');
-            $table->boolean('financial_guardian');
             
 
             $table->timestamps();

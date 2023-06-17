@@ -180,7 +180,7 @@
                                     </div>
                                     <div class="col-xl-3 mb-3">
                                         <label>{{ __('Cidade') }}</label>
-                                        <input class="form-control" id="name-city-input" value="{{$client->city->name}}" readonly>
+                                        <input class="form-control" id="name-city-input" value="{{$client->city->name ?? ''}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row @if ($client->type === 'responsavel') d-none @endif">
@@ -224,13 +224,8 @@
                                             <input type="text" id="id_family" class="form-control">
                                         </div>
                                         <div class="col-xl-3 mb-3">
-                                        <div class="form-group">
-                                            <label for="type">{{ __('Responsável Financeiro') }}</label>
-                                            <select class="form-select form-control" name="financial_guardian" id="id_financial_guardian">
-                                                <option value="0"{{ old('type') === '0' ? ' selected' : '' }}>Não</option>
-                                                <option value="1"{{ old('type') === '1' ? ' selected' : '' }}>Sim</option>
-                                            </select>
-                                        </div>
+                                            <label>{{ __('CPF') }}</label>
+                                            <input type="text" id="id_cpf" class="form-control">
                                     </div>
 
                                         <div class="col-xl-1">
@@ -300,13 +295,13 @@
                         var name = $(tr).find('td:eq(1)').text();
                         var phone = $(tr).find('td:eq(2)').text();
                         var family = $(tr).find('td:eq(3)').text();
-                        var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
+                        var cpf = $(tr).find('td:eq(4)').text();
 
                         tabelaItens.push({
                             id:id,
                             name: name,
                             phone: phone,
-                            financial_guardian: financial_guardian,
+                            cpf: cpf,
                             family: family
                         });
                     });
@@ -317,10 +312,11 @@
                     var name = $('#id_name').val();
                     var phone = $('#id_phone').val();
                     var family = $('#id_family').val();
-                    var financial_guardian = $('#id_financial_guardian').val();
+                    var cpf = $('#id_cpf').val();
 
                     // Verificar se todos os campos estão preenchidos
-                    if (name && phone && family && financial_guardian) {
+                    console.log(name,phone,family,cpf)
+                    if (name && phone && family && cpf) {
                         // Adicionar um objeto com as informações na tabela
                         var rowCount = tabelaItens.length + 1;
 
@@ -329,14 +325,14 @@
                             name: name,
                             phone: phone,
                             family: family,
-                            financial_guardian: financial_guardian
+                            cpf: cpf
                         });
 
                         // Limpar os valores dos inputs
                         $('#id_name').val('');
                         $('#id_phone').val('');
                         $('#id_family').val('');
-                        $('#id_financial_guardian').val('');
+                        $('#id_cpf').val('');
 
                         $('#btnSalvarForm').prop("disabled", false);
 
@@ -358,7 +354,7 @@
                                         <td>${item.name}</td>
                                         <td>${item.phone}</td>
                                         <td>${item.family}</td>
-                                        <td>${item.financial_guardian == 1 ? 'Sim' : 'Não'}</td>
+                                        <td>${item.cpf == 1 ? 'Sim' : 'Não'}</td>
                                         <td><button class="btn btn-danger" data-index="${index}">Remover</button></td>
                                         </tr>
                                     `);
@@ -388,12 +384,12 @@
                         var name = $(tr).find('td:eq(1)').text();
                         var phone = $(tr).find('td:eq(2)').text();
                         var family = $(tr).find('td:eq(3)').text();
-                        var financial_guardian = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
+                        var cpf = $(tr).find('td:eq(4)').text() == 'Sim' ? '1': '0';
                         data.push({
                             id: id,
                             name: name,
                             phone: phone,
-                            financial_guardian: financial_guardian,
+                            cpf: cpf,
                             family: family
                         });
                     });
