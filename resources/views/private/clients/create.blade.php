@@ -89,9 +89,10 @@
 
                                         <div class="col-xl-3 mb-3">
                                             <label>{{ __('CPF') }}</label>
-                                            <input type="text" class="form-control" id="cpf" name="cpf"
-                                                value="{{ old('cpf') }}" autofocus>
-                                            @error('cpf')
+                                            <input type="text" class="form-control" id="cpf" name="cpf" onblur="validarCPF(this.value)"
+                                                value="{{ old('cpf') }}"  data-inputmask="'mask': '999.999.999-99'" autofocus>
+                                            <span id="cpf-validation-message"></span>
+                                                @error('cpf')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -99,7 +100,7 @@
                                         <div class="col-xl-3 mb-3">
                                             <label>{{ __('Telefone') }}</label>
                                             <input type="text" class="form-control" id="phone" name="phone"
-                                                value="{{ old('phone') }}" autofocus>
+                                                value="{{ old('phone') }}" autofocus data-inputmask="'mask': '(99) 9 9999-9999'">
                                             @error('phone')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -107,7 +108,7 @@
                                         <div class="col-xl-3 mb-3">
                                             <label>{{ __('Telefone Residencial') }}</label>
                                             <input type="text" class="form-control" id="phone_home" name="phone_home"
-                                                value="{{ old('phone_home') }}" autofocus>
+                                                value="{{ old('phone_home') }}" autofocus data-inputmask="'mask': '(99) 9999-9999'">
                                             @error('phone_home')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -115,7 +116,7 @@
 
                                         <div class="col-xl-3 mb-3">
                                             <label>{{ __('Email') }}</label>
-                                            <input type="text" class="form-control" id="email" name="email"
+                                            <input type="email" class="form-control" id="email" name="email"
                                                 value="{{ old('email') }}" autofocus>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -208,7 +209,7 @@
                                         <div class="col-xl-3 mb-3">
                                             <label for="zip_code">CEP:</label>
                                             <input type="text" name="zip_code" id="zip_code" class="form-control"
-                                                value="{{ old('zip_code') }}">
+                                                value="{{ old('zip_code') }}" data-inputmask="'mask': '99999-999'">
                                         </div>
 
                                         <div class="col-xl-3 mb-3">
@@ -419,4 +420,67 @@
             });
         });
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<script>
+    $(document).ready(function() {
+        Inputmask().mask(document.querySelectorAll("[data-inputmask]"));
+    });
+</script>
+
+<script>
+    function validarCPF(cpf) {
+        // Remover caracteres especiais do CPF
+        cpf = cpf.replace(/[^\d]+/g, '');
+        
+        // Verificar se o CPF possui 11 dígitos
+        if (cpf.length !== 11) {
+            document.getElementById('cpf-validation-message').textContent = 'CPF inválido';
+            alert('CPF inválido');
+            return;
+        }
+        
+        // Validar o CPF usando o algoritmo de validação
+        let sum = 0;
+        let remainder;
+        
+        for (let i = 1; i <= 9; i++) {
+            sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
+        }
+        
+        remainder = (sum * 10) % 11;
+        
+        if ((remainder === 10) || (remainder === 11)) {
+            remainder = 0;
+        }
+        
+        if (remainder !== parseInt(cpf.substring(9, 10))) {
+            document.getElementById('cpf-validation-message').textContent = 'CPF inválido';
+            alert('CPF inválido');
+            return;
+        }
+        
+        sum = 0;
+        for (let i = 1; i <= 10; i++) {
+            sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
+        }
+        
+        remainder = (sum * 10) % 11;
+        
+        if ((remainder === 10) || (remainder === 11)) {
+            remainder = 0;
+        }
+        
+        if (remainder !== parseInt(cpf.substring(10, 11))) {
+            document.getElementById('cpf-validation-message').textContent = 'CPF inválido';
+            alert('CPF inválido');
+            return;
+        }
+        
+        // CPF válido
+        document.getElementById('cpf-validation-message').textContent = 'CPF válido';
+    }
+</script>
+
 @endsection
