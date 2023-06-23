@@ -147,7 +147,7 @@ class ClientController extends Controller
             'name' => 'required|string|max:255',
             'nickname' => 'required|string|max:255',
             'type' => 'required|in:aluno,responsavel',
-            'email' => 'nullable|email|unique:clients,email',
+            'email' => 'nullable|email|unique:clients,email,' . $client->id,
             'phone' => 'nullable|string|max:20',
             'phone_home' => 'nullable|string|max:20',
             'birth_date' => 'nullable|date|before_or_equal:today',

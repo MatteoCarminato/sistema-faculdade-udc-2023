@@ -29,6 +29,9 @@
 
     <!--- FONT-ICONS CSS -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+
     <!-- INTERNAL Switcher css -->
     <link href="{{ asset('/assets/switcher/css/switcher.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/switcher/demo.css') }}" rel="stylesheet">
@@ -1160,7 +1163,6 @@
         <!-- Switcher js -->
         <script src="{{ asset('/assets/switcher/js/switcher.js') }}"></script>
 
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
         <script>

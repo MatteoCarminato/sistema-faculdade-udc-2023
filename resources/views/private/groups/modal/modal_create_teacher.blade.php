@@ -69,13 +69,17 @@ $(document).ready(function () {
             data: formData,
             dataType: 'json',
             success: function (response) {
+                console.log('a', response)
                 $('#modal_teacher_form').modal('show');
             },
             error: function (xhr, status, error) {
+
+                console.log('b', response)
                 $('#modal_teacher_form').modal('show');
            }
         });
         $('#modal_create_teacher').modal('hide');
+        $('#modal_teacher_form').modal('show');
     });
 });
     

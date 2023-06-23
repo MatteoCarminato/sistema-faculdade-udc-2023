@@ -4,6 +4,8 @@
 
 {{-- Modal --}}
 @include('components.modal.modal_country_form')
+
+@include('components.modal.modal_create_country_form')
 {{-- Modal --}}
 
 <!-- CONTAINER -->

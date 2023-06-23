@@ -402,7 +402,7 @@
                     var name = $(tr).find('td:eq(1)').text();
                     var phone = $(tr).find('td:eq(2)').text();
                     var family = $(tr).find('td:eq(3)').text();
-                    var cpf = $(tr).find('td:eq(4)').text() == 'Sim' ? '1' : '0';
+                    var cpf = $(tr).find('td:eq(4)').text();
                     data.push({
                         qnt: qnt,
                         name: name,

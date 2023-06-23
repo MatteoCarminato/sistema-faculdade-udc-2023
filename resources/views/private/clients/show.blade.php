@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="col-xl-3 mb-3">
                                         <label>{{ __('Cidade') }}</label>
-                                        <input class="form-control" id="name-city-input" value="{{$client->city->name}}" disabled>
+                                        <input class="form-control" id="name-city-input" value="{{$client->city->name ?? ''}}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-row @if ($client->type === 'responsavel') d-none @endif">
@@ -241,8 +241,9 @@
                                 <div class="row">
                                     <div class="col-xl-11"></div>
                                     <div class="col-xl-1">
-                                        <button type="submit" id="btnSalvarForm" class="btn btn-primary">{{ __('Salvar') }}</button>
+                                        <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('Voltar') }}</a>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

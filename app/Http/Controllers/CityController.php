@@ -27,7 +27,7 @@ class CityController extends Controller
             'name' => 'required|unique:cities|max:255',
             'slug' => 'required|unique:cities,slug',
             'phone_code' => 'required|nullable|integer',
-            'state_id' => 'required|exists:cities,id',
+            'state_id' => 'required|exists:states,id',
         ]);
         City::create($validatedData);
 
@@ -50,7 +50,7 @@ class CityController extends Controller
             'name' => ['required', Rule::unique('cities')->ignore($city)],
             'slug' => ['required', Rule::unique('cities')->ignore($city)],
             'phone_code' => 'required|nullable|integer',
-            'state_id' => 'required|exists:cities,id',
+            'state_id' => 'required|exists:states,id',
         ]);
 
         $city->update($data);
