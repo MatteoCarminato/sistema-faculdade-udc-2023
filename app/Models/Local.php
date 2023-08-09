@@ -12,6 +12,7 @@ class Local extends Model
     use HasFactory, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'id',
         'name'
     ];
 

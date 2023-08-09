@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use App\Services\TeacherService;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+
+    private $teacherService;
+
+    // Inicialize o serviço no construtor
+    public function __construct(TeacherService $teacherService)
+    {
+        $this->teacherService = $teacherService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $searchTerm = $request->input('search') ?? '';
-        $teachers = Teacher::search($searchTerm)->paginate(10);
+        $teachers = $this->teacherService->all($searchTerm);
 
         return view('private.teachers.index', compact('teachers'));
     }
@@ -31,6 +41,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+
         // Validação dos campos
         $validatedData = $request->validate([
             'name' => 'required',
@@ -39,8 +50,8 @@ class TeacherController extends Controller
             'phone' => 'nullable',
         ]);
 
-        // Cria um novo professor com os dados validados
-        Teacher::create($validatedData);
+        // Crie um novo professor usando o serviço
+        $this->teacherService->create($validatedData);
 
         return redirect()->route('teachers.index')->with('success', 'Professor criado com sucesso.');
     }
@@ -61,6 +72,7 @@ class TeacherController extends Controller
         return view('private.teachers.edit', compact('teacher'));
     }
 
+    
     /**
      * Update the specified resource in storage.
      */
@@ -73,11 +85,8 @@ class TeacherController extends Controller
             'phone' => 'nullable'
         ]);
 
-        $teacher->name = $validatedData['name'];
-        $teacher->email = $validatedData['email'];
-        $teacher->cref = $validatedData['cref'];
-        $teacher->phone = $validatedData['phone'];
-        $teacher->save();
+        // Atualize o professor usando o serviço
+        $this->teacherService->update($teacher, $validatedData);
 
         return redirect()->route('teachers.index')->with('success', 'Professor atualizado com sucesso!');
     }
@@ -87,16 +96,17 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        $teacher->delete();
+        // Exclua o professor usando o serviço
+        $this->teacherService->deleteTeacher($teacher);
 
         return redirect()->route('teachers.index')->with('success', 'Professor excluído com sucesso.');
     }
 
     public function buscar(Request $request)
     {
-        $teacher = $request->input('search') ?? '';
-        $teacher = Teacher::search($teacher)->paginate(10);
+        $searchTerm = $request->input('search') ?? '';
+        $teachers = $this->teacherService->all($searchTerm);
 
-        return response()->json($teacher);
+        return response()->json($teachers);
     }
 }

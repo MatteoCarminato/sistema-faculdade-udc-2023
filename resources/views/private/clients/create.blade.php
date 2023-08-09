@@ -483,4 +483,39 @@
     }
 </script>
 
+
+<script>
+    // Função para buscar o CEP e preencher os campos
+    function buscarCep() {
+        var cep = $('#zip_code').val().replace(/\D/g, '');
+
+        if (cep.length !== 8) {
+            alert('CEP inválido');
+            return;
+        }
+
+        // Requisição ao ViaCEP
+        $.ajax({
+            url: 'https://api.postmon.com.br/v1/cep/' + cep,
+            type: 'GET',
+            success: function(endereco) {
+                console.log(endereco)
+                // Preenchimento dos campos
+                $('#cidade').val(endereco.localidade);
+                $('#estado').val(endereco.uf);
+                $('#address').val(endereco.logradouro);
+                $('#district').val(endereco.bairro);
+            },
+            error: function() {
+                alert('Erro ao buscar o CEP');
+            }
+        });
+    }
+
+    $('#zip_code').blur(function() {
+        buscarCep();
+    });
+</script>
+
+
 @endsection

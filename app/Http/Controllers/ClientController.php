@@ -42,7 +42,7 @@ class ClientController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'nickname' => 'required|string|max:255',
+            'nickname' => 'string|max:255',
             'type' => 'required|in:aluno,responsavel',
             'email' => 'nullable|email|unique:clients,email',
             'phone' => 'nullable|string|max:20',
@@ -50,7 +50,7 @@ class ClientController extends Controller
             'birth_date' => 'nullable|date|before_or_equal:today',
             'rg' => 'nullable|string|max:20',
             'cpf' => 'nullable|string|max:14',
-            'sex' => 'required| in:masculino,feminino',
+            'sex' => 'in:masculino,feminino',
             'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
             'height' => 'nullable|numeric|min:0|max:999.99',
             'weight' => 'nullable|numeric|min:0|max:999.99',
@@ -145,7 +145,7 @@ class ClientController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'nickname' => 'required|string|max:255',
+            'nickname' => 'string|max:255',
             'type' => 'required|in:aluno,responsavel',
             'email' => 'nullable|email|unique:clients,email,' . $client->id,
             'phone' => 'nullable|string|max:20',
@@ -153,7 +153,7 @@ class ClientController extends Controller
             'birth_date' => 'nullable|date|before_or_equal:today',
             'rg' => 'nullable|string|max:20',
             'cpf' => 'nullable|string|max:14',
-            'sex' => 'required| in:masculino,feminino',
+            'sex' => 'in:masculino,feminino',
             'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
             'height' => 'nullable|numeric|min:0|max:999.99',
             'weight' => 'nullable|numeric|min:0|max:999.99',

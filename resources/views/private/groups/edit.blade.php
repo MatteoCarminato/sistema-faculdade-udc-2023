@@ -103,7 +103,7 @@
                                         <div class="col-xl-4 mb-3">
                                             <label>{{ __('Categoria') }}</label>
                                             <input class="form-control" id="name-categories-input" readonly
-                                                value="{{ $group->category_name }}">
+                                                value="{{ $group->category->name }}">
                                         </div>
 
                                         <div class="col-xl-2 mb-3">

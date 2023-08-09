@@ -11,7 +11,7 @@ class Group extends Model
 {
     use HasFactory, SoftDeletes, Searchable;
 
-    protected $fillable = ['name', 'status', 'category_id', 'modality_id'];
+    protected $fillable = ['name', 'status', 'category_id', 'modality_id', 'teacher_id', 'locals_id'];
 
     public function toSearchableArray()
     {
@@ -25,9 +25,19 @@ class Group extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
     public function modality()
     {
         return $this->belongsTo(Modality::class);
+    }
+
+    public function local()
+    {
+        return $this->belongsTo(Local::class, 'id');
     }
 
     public function groupHours()

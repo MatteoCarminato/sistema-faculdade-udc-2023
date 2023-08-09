@@ -18,9 +18,16 @@ return new class extends Migration
            
             $table->unsignedTinyInteger('category_id');
             $table->unsignedTinyInteger('modality_id');
+            $table->unsignedTinyInteger('teacher_id');
+            $table->unsignedTinyInteger('locals_id');
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('teacher_id')
+            ->references('id')
+            ->on('teachers')
+            ->onDelete('cascade');
 
             $table->foreign('category_id')
             ->references('id')
@@ -30,6 +37,11 @@ return new class extends Migration
             $table->foreign('modality_id')
             ->references('id')
             ->on('modalities')
+            ->onDelete('cascade');
+
+            $table->foreign('locals_id')
+            ->references('id')
+            ->on('locals')
             ->onDelete('cascade');
         });
     }

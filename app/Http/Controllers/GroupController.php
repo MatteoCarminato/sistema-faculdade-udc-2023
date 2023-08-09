@@ -45,6 +45,8 @@ class GroupController extends Controller
             'name' => $validatedGroupData['name'],
             'category_id' => $validatedGroupData['category_id'],
             'modality_id' => $validatedGroupData['modality_id'],
+            'teacher_id' => $validatedGroupData['teacher_id'],
+            'locals_id' => $validatedGroupData['locals_id'],
         ]);
 
         // Criação de um novo registro em "group_hours" associado ao grupo criado
@@ -67,7 +69,8 @@ class GroupController extends Controller
 
     public function show(Group $group)
     {
-        return view('private.groups.show', compact('group'));
+        $groupHours = GroupHour::where('groups_id');
+        return view('private.groups.show', compact('group','groupHours'));
     }
 
     public function edit(Group $group)
@@ -77,7 +80,6 @@ class GroupController extends Controller
 
     public function update(Request $request, Group $group)
     {
-        dd($request);
         // Validação dos dados do formulário
         $validatedData = $request->validate([
             'name' => 'required|string',
@@ -91,6 +93,8 @@ class GroupController extends Controller
             'name' => $validatedData['name'],
             'category_id' => $validatedData['category_id'],
             'modality_id' => $validatedData['modality_id'],
+            'teacher_id' => $validatedData['teacher_id'],
+            'locals_id' => $validatedData['locals_id'],
         ];
 
         $existingGroupHourIds = $group->groupHours->pluck('groups_id')->toArray();
