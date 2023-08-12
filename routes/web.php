@@ -56,6 +56,7 @@ Route::get('/parents', [ClientController::class, 'indexParent'])->name('parents.
 Route::delete('/parents/{client}', [ClientController::class, 'destroy'])->name('parents.destroy');
 Route::get('buscar/clients', [ClientController::class, 'buscarAluno'])->name('clients.busca');
 Route::get('buscar/parents', [ClientController::class, 'buscarReponsavel'])->name('responsavel.busca');
+Route::post('salvar/clients', [ClientController::class, 'salvarAlunoBasico'])->name('clients.salvarAlunoBasico');
 
 Route::resource('payment_terms', PaymentTermController::class);
 Route::get('buscar/payment_terms', [PaymentTermController::class, 'buscar'])->name('payment_terms.busca');

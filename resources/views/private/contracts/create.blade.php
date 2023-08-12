@@ -11,7 +11,6 @@
 
 
     @include('private.contracts.modal.modal_groups_form')
-    @include('private.contracts.modal.modal_create_groups')
 
 
 

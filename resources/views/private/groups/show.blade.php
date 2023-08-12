@@ -91,19 +91,6 @@
                                 </div>
                                 <hr>
                                 <div class="card-header" style="padding: 1rem; margin-left: -27px;">
-                                    <h3 class="card-title">Data e Hora</h3>
-                                </div>
-                                <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-                                    <div class="col-xl-5 col-md-5">
-                                        <label>{{ __('Dia da semana') }}</label>
-                                        <input type="text" class="form-control" value="{{ old('id_weekday') }}" readonly>
-                                    </div>
-                                    <div class="col-xl-5 col-md-5">
-                                        <label>{{ __('Hora do dia') }}</label>
-                                        <input type="text" class="form-control" value="{{ old('id_hour') }}" readonly>
-                                    </div>
-                                </div>
-                                <div class="card-header" style="padding: 1rem; margin-left: -27px;">
                                     <h3 class="card-title">Horarios</h3>
                                 </div>
                                 <div class="row" style="margin-top: 20px; margin-bottom: 20px;">

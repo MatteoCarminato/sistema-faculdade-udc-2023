@@ -69,7 +69,7 @@ class GroupController extends Controller
 
     public function show(Group $group)
     {
-        $groupHours = GroupHour::where('groups_id');
+        $groupHours = GroupHour::where('groups_id', $group->id)->get();
         return view('private.groups.show', compact('group','groupHours'));
     }
 

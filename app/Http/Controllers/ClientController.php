@@ -11,259 +11,278 @@ use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
-    public function index(Request $request)
-    {
+  public function index(Request $request)
+  {
 
-        $searchTerm = $request->input('search') ?? '';
-        $clients = Client::search($searchTerm)->where('type', 'aluno')->orderBy('name')->paginate(10);
+    $searchTerm = $request->input('search') ?? '';
+    $clients = Client::search($searchTerm)->where('type', 'aluno')->orderBy('name')->paginate(10);
 
-        return view('private.clients.index', compact('clients'));
-    }
+    return view('private.clients.index', compact('clients'));
+  }
 
-    public function indexParent(Request $request)
-    {
+  public function indexParent(Request $request)
+  {
 
-        $searchTerm = $request->input('search') ?? '';
-        $clients = Client::search($searchTerm)
-            ->where('type', 'responsavel')
-            ->where('deleted_at', null)
-            ->orderBy('name')
-            ->paginate(10);
+    $searchTerm = $request->input('search') ?? '';
+    $clients = Client::search($searchTerm)
+      ->where('type', 'responsavel')
+      ->where('deleted_at', null)
+      ->orderBy('name')
+      ->paginate(10);
 
-        return view('private.clients.indexParent', compact('clients'));
-    }
+    return view('private.clients.indexParent', compact('clients'));
+  }
 
-    public function create()
-    {
-        return view('private.clients.create');
-    }
+  public function create()
+  {
+    return view('private.clients.create');
+  }
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'nickname' => 'string|max:255',
-            'type' => 'required|in:aluno,responsavel',
-            'email' => 'nullable|email|unique:clients,email',
-            'phone' => 'nullable|string|max:20',
-            'phone_home' => 'nullable|string|max:20',
-            'birth_date' => 'nullable|date|before_or_equal:today',
-            'rg' => 'nullable|string|max:20',
-            'cpf' => 'nullable|string|max:14',
-            'sex' => 'in:masculino,feminino',
-            'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
-            'height' => 'nullable|numeric|min:0|max:999.99',
-            'weight' => 'nullable|numeric|min:0|max:999.99',
-            'school' => 'nullable|string|max:255',
-            'shift' => 'nullable|in:manha,tarde,noite',
-            'address' => 'nullable|string|max:255',
-            'city_id' => 'nullable|exists:cities,id',
-            'zip_code' => 'nullable|string|max:10',
-            'number' => 'nullable|string|max:20',
-            'complements' => 'nullable|string|max:255',
-            'district' => 'nullable|string|max:255',
-            'active' => 'nullable|boolean',
-            'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
+  public function store(Request $request)
+  {
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255',
+      'nickname' => 'string|max:255',
+      'type' => 'required|in:aluno,responsavel',
+      'email' => 'nullable|email|unique:clients,email',
+      'phone' => 'nullable|string|max:20',
+      'phone_home' => 'nullable|string|max:20',
+      'birth_date' => 'nullable|date|before_or_equal:today',
+      'rg' => 'nullable|string|max:20',
+      'cpf' => 'nullable|string|max:14',
+      'sex' => 'in:masculino,feminino',
+      'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
+      'height' => 'nullable|numeric|min:0|max:999.99',
+      'weight' => 'nullable|numeric|min:0|max:999.99',
+      'school' => 'nullable|string|max:255',
+      'shift' => 'nullable|in:manha,tarde,noite',
+      'address' => 'nullable|string|max:255',
+      'city_id' => 'nullable|exists:cities,id',
+      'zip_code' => 'nullable|string|max:10',
+      'number' => 'nullable|string|max:20',
+      'complements' => 'nullable|string|max:255',
+      'district' => 'nullable|string|max:255',
+      'active' => 'nullable|boolean',
+      'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
+    ]);
+
+    $decodeInstallments = $validatedData['responsaveis'];
+    $guardians = json_decode($decodeInstallments, true);
+
+    $client = new Client([
+      'name' => $validatedData['name'],
+      'nickname' => $validatedData['nickname'],
+      'type' => $validatedData['type'],
+      'email' => $validatedData['email'],
+      'phone' => $validatedData['phone'],
+      'phone_home' => $validatedData['phone_home'],
+      'birth_date' => $validatedData['birth_date'],
+      'rg' => $validatedData['rg'],
+      'cpf' => $validatedData['cpf'],
+      'sex' => $validatedData['sex'],
+      'blood_types' => $validatedData['blood_types'],
+      'height' => $validatedData['height'],
+      'weight' => $validatedData['weight'],
+      'school' => $validatedData['school'],
+      'shift' => $validatedData['shift'],
+      'address' => $validatedData['address'],
+      'city_id' => $validatedData['city_id'],
+      'zip_code' => $validatedData['zip_code'],
+      'number' => $validatedData['number'],
+      'complements' => $validatedData['complements'],
+      'district' => $validatedData['district'],
+    ]);
+
+    DB::beginTransaction();
+    try {
+      $client->save();
+
+      foreach ($guardians as $index => $parents) {
+        $parent = new Client([
+          'name' => $parents['name'],
+          'phone' => $parents['phone'],
+          'family' => $parents['family'],
+          'cpf' => $parents['cpf'],
+          'type' => 'responsavel'
+        ]);
+        $parent->save();
+
+        $parentChild = new ParentChild([
+          'client_id' => $client->id,
+          'parent_id' => $parent->id,
+          'type' => $parents['family']
         ]);
 
-        $decodeInstallments = $validatedData['responsaveis'];
-        $guardians = json_decode($decodeInstallments, true);
+        $parentChild->save();
+      }
 
-        $client = new Client([
-            'name' => $validatedData['name'],
-            'nickname' => $validatedData['nickname'],
-            'type' => $validatedData['type'],
-            'email' => $validatedData['email'],
-            'phone' => $validatedData['phone'],
-            'phone_home' => $validatedData['phone_home'],
-            'birth_date' => $validatedData['birth_date'],
-            'rg' => $validatedData['rg'],
-            'cpf' => $validatedData['cpf'],
-            'sex' => $validatedData['sex'],
-            'blood_types' => $validatedData['blood_types'],
-            'height' => $validatedData['height'],
-            'weight' => $validatedData['weight'],
-            'school' => $validatedData['school'],
-            'shift' => $validatedData['shift'],
-            'address' => $validatedData['address'],
-            'city_id' => $validatedData['city_id'],
-            'zip_code' => $validatedData['zip_code'],
-            'number' => $validatedData['number'],
-            'complements' => $validatedData['complements'],
-            'district' => $validatedData['district'],
+      DB::commit();
+
+      if ($client->type === 'responsavel') {
+        return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
+      } else {
+        return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
+      }
+    } catch (\Illuminate\Database\QueryException $exception) {
+      DB::rollBack();
+      Log::debug('Warning - Não cadastrar o Client: ' . $exception);
+
+      return redirect()->route('clients.index')->with('failed', 'Informações não cadastrada.');
+    }
+  }
+
+  public function show(Client $client)
+  {
+    return view('private.clients.show', compact('client'));
+  }
+
+  public function edit(Client $client)
+  {
+    return view('private.clients.edit', compact('client'));
+  }
+
+  public function update(Request $request, Client $client)
+  {
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255',
+      'nickname' => 'string|max:255',
+      'type' => 'required|in:aluno,responsavel',
+      'email' => 'nullable|email|unique:clients,email,' . $client->id,
+      'phone' => 'nullable|string|max:20',
+      'phone_home' => 'nullable|string|max:20',
+      'birth_date' => 'nullable|date|before_or_equal:today',
+      'rg' => 'nullable|string|max:20',
+      'cpf' => 'nullable|string|max:14',
+      'sex' => 'in:masculino,feminino',
+      'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
+      'height' => 'nullable|numeric|min:0|max:999.99',
+      'weight' => 'nullable|numeric|min:0|max:999.99',
+      'school' => 'nullable|string|max:255',
+      'shift' => 'nullable|in:manha,tarde,noite',
+      'address' => 'nullable|string|max:255',
+      'city_id' => 'nullable|exists:cities,id',
+      'zip_code' => 'nullable|string|max:10',
+      'number' => 'nullable|string|max:20',
+      'complements' => 'nullable|string|max:255',
+      'district' => 'nullable|string|max:255',
+      'active' => 'nullable|boolean',
+      'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
+    ]);
+
+    $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
+    $newParentIds = [];
+
+    $decodeInstallments = $validatedData['responsaveis'];
+    $guardians = json_decode($decodeInstallments, true);
+
+    $instanciado = [
+      'name' => $validatedData['name'],
+      'nickname' => $validatedData['nickname'],
+      'type' => $validatedData['type'],
+      'email' => $validatedData['email'],
+      'phone' => $validatedData['phone'],
+      'phone_home' => $validatedData['phone_home'],
+      'birth_date' => $validatedData['birth_date'],
+      'rg' => $validatedData['rg'],
+      'cpf' => $validatedData['cpf'],
+      'sex' => $validatedData['sex'],
+      'blood_types' => $validatedData['blood_types'],
+      'height' => $validatedData['height'],
+      'weight' => $validatedData['weight'],
+      'school' => $validatedData['school'],
+      'shift' => $validatedData['shift'],
+      'address' => $validatedData['address'],
+      'city_id' => $validatedData['city_id'],
+      'zip_code' => $validatedData['zip_code'],
+      'number' => $validatedData['number'],
+      'complements' => $validatedData['complements'],
+      'district' => $validatedData['district'],
+    ];
+    DB::beginTransaction();
+    try {
+      $client->update($instanciado);
+
+      foreach ($guardians as $guardianData) {
+        $guardian = Client::updateOrCreate(['id' => $guardianData['id'] ?? null], [
+          'name' => $guardianData['name'],
+          'phone' => $guardianData['phone'],
+          'type' => 'responsavel',
         ]);
 
-        DB::beginTransaction();
-        try {
-            $client->save();
+        ParentChild::updateOrCreate(
+          ['client_id' => $client->id, 'parent_id' => $guardian->id],
+          ['type' => $guardianData['family']]
+        );
 
-            foreach ($guardians as $index => $parents) {
-                $parent = new Client([
-                    'name' => $parents['name'],
-                    'phone' => $parents['phone'],
-                    'family' => $parents['family'],
-                    'cpf' => $parents['cpf'],
-                    'type' => 'responsavel'
-                ]);
-                $parent->save();
+        $newParentIds[] = $guardian->id;
+      }
 
-                $parentChild = new ParentChild([
-                    'client_id' => $client->id,
-                    'parent_id' => $parent->id,
-                    'type' => $parents['family']
-                ]);
+      $deletedParentIds = array_diff($existingParentIds, $newParentIds);
 
-                $parentChild->save();
-            }
+      if (!empty($deletedParentIds)) {
+        ParentChild::where('client_id', $client->id)
+          ->whereIn('parent_id', $deletedParentIds)
+          ->delete();
 
-            DB::commit();
+        Client::whereIn('id', $deletedParentIds)
+          ->delete();
+      }
 
-            if ($client->type === 'responsavel') {
-                return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
-            } else {
-                return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
-            }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            DB::rollBack();
-            Log::debug('Warning - Não cadastrar o Client: ' . $exception);
+      DB::commit();
+      if ($client->type === 'responsavel') {
+        return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
+      } else {
+        return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
+      }
 
-            return redirect()->route('clients.index')->with('failed', 'Informações não cadastrada.');
-        }
+    } catch (\Illuminate\Database\QueryException $exception) {
+      DB::rollBack();
+      Log::debug('Warning - Não cadastrar o Client: ' . $exception);
+
+      return redirect()->route('clients.index')->with('failed', 'Informações não atualizada.');
     }
 
-    public function show(Client $client)
-    {
-        return view('private.clients.show', compact('client'));
-    }
+  }
 
-    public function edit(Client $client)
-    {
-        return view('private.clients.edit', compact('client'));
-    }
+  public function destroy(Client $client)
+  {
+    $client->delete();
 
-    public function update(Request $request, Client $client)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'nickname' => 'string|max:255',
-            'type' => 'required|in:aluno,responsavel',
-            'email' => 'nullable|email|unique:clients,email,' . $client->id,
-            'phone' => 'nullable|string|max:20',
-            'phone_home' => 'nullable|string|max:20',
-            'birth_date' => 'nullable|date|before_or_equal:today',
-            'rg' => 'nullable|string|max:20',
-            'cpf' => 'nullable|string|max:14',
-            'sex' => 'in:masculino,feminino',
-            'blood_types' => 'nullable|in:a+,b+,o+,ab+,a-,b-,o-,ab-',
-            'height' => 'nullable|numeric|min:0|max:999.99',
-            'weight' => 'nullable|numeric|min:0|max:999.99',
-            'school' => 'nullable|string|max:255',
-            'shift' => 'nullable|in:manha,tarde,noite',
-            'address' => 'nullable|string|max:255',
-            'city_id' => 'nullable|exists:cities,id',
-            'zip_code' => 'nullable|string|max:10',
-            'number' => 'nullable|string|max:20',
-            'complements' => 'nullable|string|max:255',
-            'district' => 'nullable|string|max:255',
-            'active' => 'nullable|boolean',
-            'responsaveis' => $request->input('type') === 'aluno' ? new CheckArray : '',
-        ]);
+    return redirect()->route('parents.index')->with('success', 'Cliente removido com sucesso.');
+  }
 
-        $existingParentIds = $client->parent()->pluck('parent_id')->toArray();
-        $newParentIds = [];
+  public function buscarAluno(Request $request)
+  {
+    $clients = $request->input('search') ?? '';
+    $clients = Client::search($clients)->where('type', 'aluno')->paginate(10);
 
-        $decodeInstallments = $validatedData['responsaveis'];
-        $guardians = json_decode($decodeInstallments, true);
+    return response()->json($clients);
+  }
 
-        $instanciado = [
-            'name' => $validatedData['name'],
-            'nickname' => $validatedData['nickname'],
-            'type' => $validatedData['type'],
-            'email' => $validatedData['email'],
-            'phone' => $validatedData['phone'],
-            'phone_home' => $validatedData['phone_home'],
-            'birth_date' => $validatedData['birth_date'],
-            'rg' => $validatedData['rg'],
-            'cpf' => $validatedData['cpf'],
-            'sex' => $validatedData['sex'],
-            'blood_types' => $validatedData['blood_types'],
-            'height' => $validatedData['height'],
-            'weight' => $validatedData['weight'],
-            'school' => $validatedData['school'],
-            'shift' => $validatedData['shift'],
-            'address' => $validatedData['address'],
-            'city_id' => $validatedData['city_id'],
-            'zip_code' => $validatedData['zip_code'],
-            'number' => $validatedData['number'],
-            'complements' => $validatedData['complements'],
-            'district' => $validatedData['district'],
-        ];
-        DB::beginTransaction();
-        try {
-            $client->update($instanciado);
+  public function buscarReponsavel(Request $request)
+  {
+    $clients = $request->input('search') ?? '';
+    $clients = Client::search($clients)->where('type', 'responsavel')->paginate(10);
 
-            foreach ($guardians as $guardianData) {
-                $guardian = Client::updateOrCreate(['id' => $guardianData['id'] ?? null], [
-                    'name' => $guardianData['name'],
-                    'phone' => $guardianData['phone'],
-                    'type' => 'responsavel',
-                ]);
+    return response()->json($clients);
+  }
 
-                ParentChild::updateOrCreate(
-                    ['client_id' => $client->id, 'parent_id' => $guardian->id],
-                    ['type' => $guardianData['family']]
-                );
+  public function salvarAlunoBasico(Request $request)
+  {
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255',
+      'nickname' => 'string|max:255',
+      'type' => 'required|in:aluno,responsavel',
+      'phone' => 'nullable|string|max:20',
+      'birth_date' => 'nullable|date|before_or_equal:today',
+      'rg' => 'nullable|string|max:20',
+      'cpf' => 'nullable|string|max:14',
+      'sex' => 'in:masculino,feminino',
+    ]);
 
-                $newParentIds[] = $guardian->id;
-            }
+    Client::create($validatedData);
 
-            $deletedParentIds = array_diff($existingParentIds, $newParentIds);
 
-            if (!empty($deletedParentIds)) {
-                ParentChild::where('client_id', $client->id)
-                    ->whereIn('parent_id', $deletedParentIds)
-                    ->delete();
+  }
 
-                Client::whereIn('id', $deletedParentIds)
-                    ->delete();
-            }
-
-            DB::commit();
-            if ($client->type === 'responsavel') {
-                return redirect()->route('parents.index')->with('success', 'Responsável atualizado com sucesso.');
-            } else {
-                return redirect()->route('clients.index')->with('success', 'Aluno atualizado com sucesso.');
-            }
-
-        } catch (\Illuminate\Database\QueryException $exception) {
-            DB::rollBack();
-            Log::debug('Warning - Não cadastrar o Client: ' . $exception);
-
-            return redirect()->route('clients.index')->with('failed', 'Informações não atualizada.');
-        }
-
-    }
-
-    public function destroy(Client $client)
-    {
-        $client->delete();
-
-        return redirect()->route('parents.index')->with('success', 'Cliente removido com sucesso.');
-    }
-
-    public function buscarAluno(Request $request)
-    {
-        $clients = $request->input('search') ?? '';
-        $clients = Client::search($clients)->where('type', 'aluno')->paginate(10);
-
-        return response()->json($clients);
-    }
-
-    public function buscarReponsavel(Request $request)
-    {
-        $clients = $request->input('search') ?? '';
-        $clients = Client::search($clients)->where('type', 'responsavel')->paginate(10);
-
-        return response()->json($clients);
-    }
 }

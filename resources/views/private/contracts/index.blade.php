@@ -58,8 +58,18 @@
                                             <td>{{ $contract->client->name }}</td>
                                             <td>{{ $contract->responsible->name }}</td>
                                             <td>{{ $contract->responsible->phone }}</td>
-                                            <td>{{ $contract->status }}</td>
-                                            <td class="td-actions text-right">
+                                            <td>
+                                              @if ($contract->status == 'pendente')
+                                                  <span class="badge bg-warning rounded-pill">Pendente</span>
+                                              @elseif ($contract->status == 'confirmado')
+                                                  <span class="badge bg-success rounded-pill">Aprovado</span>
+                                              @elseif ($contract->status == 'cancelado')
+                                                  <span class="badge bg-danger rounded-pill">Recusado</span>
+                                              @else
+                                                  <span class="badge bg-secondary rounded-pill">{{ $contract->status }}</span>
+                                              @endif
+                                          </td>
+                                          <td class="td-actions text-right">
                                                 <form action="{{ route('contracts.destroy', $contract->id) }}"
                                                     method="post">
                                                     @csrf

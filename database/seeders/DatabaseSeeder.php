@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             LocalSeeder::class,
             CategorySeeder::class,
             ModalitySeeder::class,
-            GroupSeeder::class,
+            // GroupSeeder::class,
             ClientSeeder::class
         ]);
     }
