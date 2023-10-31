@@ -10,6 +10,5 @@ class TeacherRepository extends BaseRepository
     {
         parent::__construct($teacher);
     }
-
     
 }

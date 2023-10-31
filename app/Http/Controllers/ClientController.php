@@ -281,8 +281,22 @@ class ClientController extends Controller
     ]);
 
     Client::create($validatedData);
+  }
 
+  public function salvarResponsavelBasico(Request $request)
+  {
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255',
+      'nickname' => 'string|max:255',
+      'type' => 'required|in:aluno,responsavel',
+      'phone' => 'nullable|string|max:20',
+      'birth_date' => 'nullable|date|before_or_equal:today',
+      'rg' => 'nullable|string|max:20',
+      'cpf' => 'nullable|string|max:14',
+      'sex' => 'in:masculino,feminino',
+    ]);
 
+    Client::create($validatedData);
   }
 
 }

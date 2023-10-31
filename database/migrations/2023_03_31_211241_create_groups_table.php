@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('modality_id');
             $table->unsignedTinyInteger('teacher_id');
             $table->unsignedTinyInteger('locals_id');
+            $table->integer('year');
 
             $table->timestamps();
             $table->softDeletes();

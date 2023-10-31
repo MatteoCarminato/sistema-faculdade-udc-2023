@@ -11,7 +11,7 @@ class Group extends Model
 {
     use HasFactory, SoftDeletes, Searchable;
 
-    protected $fillable = ['name', 'status', 'category_id', 'modality_id', 'teacher_id', 'locals_id'];
+    protected $fillable = ['name', 'status', 'year', 'category_id', 'modality_id', 'teacher_id', 'locals_id'];
 
     public function toSearchableArray()
     {

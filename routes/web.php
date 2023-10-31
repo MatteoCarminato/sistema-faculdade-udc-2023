@@ -57,6 +57,7 @@ Route::delete('/parents/{client}', [ClientController::class, 'destroy'])->name('
 Route::get('buscar/clients', [ClientController::class, 'buscarAluno'])->name('clients.busca');
 Route::get('buscar/parents', [ClientController::class, 'buscarReponsavel'])->name('responsavel.busca');
 Route::post('salvar/clients', [ClientController::class, 'salvarAlunoBasico'])->name('clients.salvarAlunoBasico');
+Route::post('salvar/parents', [ClientController::class, 'salvarResponsavelBasico'])->name('clients.salvarResponsavelBasico');
 
 Route::resource('payment_terms', PaymentTermController::class);
 Route::get('buscar/payment_terms', [PaymentTermController::class, 'buscar'])->name('payment_terms.busca');
@@ -90,8 +91,11 @@ Route::controller(CalendarController::class)->group(function () {
     Route::post('drop/events','dropEvents')->name('calendar.dropevents');
 });
 
+Route::get('/contrato', function () {
+    return view('layouts.contrato');
+});
 
-//log-viewer -> Rota para listar logs
-//http://127.0.0.1:8000/telescope/
+// //log-viewer -> Rota para listar logs
+// //http://127.0.0.1:8000/telescope/
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

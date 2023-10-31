@@ -43,6 +43,7 @@ class GroupController extends Controller
         // Criação de um novo grupo com os dados fornecidos
         $group = Group::create([
             'name' => $validatedGroupData['name'],
+            'year' => $validatedGroupData['year'],
             'category_id' => $validatedGroupData['category_id'],
             'modality_id' => $validatedGroupData['modality_id'],
             'teacher_id' => $validatedGroupData['teacher_id'],

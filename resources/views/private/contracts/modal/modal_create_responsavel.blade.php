@@ -68,7 +68,7 @@
         $('#responsavel-form').submit(function(event) {
             event.preventDefault(); // Previne o envio do formulário via HTML
             var form = $(this);
-            var url = "{{ route('clients.store') }}"
+            var url = "{{ route('clients.salvarResponsavelBasico') }}"
             var formData = form.serialize();
             console.log('formData', formData)
             $.ajax({

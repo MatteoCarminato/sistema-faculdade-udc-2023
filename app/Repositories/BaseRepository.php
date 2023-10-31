@@ -25,6 +25,7 @@ class BaseRepository
 
     public function create(array $data)
     {
+        dd($data);
         return $this->model->create($data);
     }
 

@@ -11,9 +11,9 @@
                             <div class="col-9 col-md-9" style="text-align: left;margin-bottom: 17px;">
                                 <input type="text" name="search" class="form-control" placeholder="Procurar..." aria-label="Search" aria-describedby="button-addon2"  id="search-input">
                             </div>
-                            <div class="col-3 col-md-3">
+                            <!-- <div class="col-3 col-md-3">
                                 <button class="modal-effect input-group-text" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modal_create_payment_terms"> Cadastrar </button>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
 

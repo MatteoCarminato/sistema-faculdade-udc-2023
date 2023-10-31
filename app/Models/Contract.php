@@ -18,6 +18,7 @@ class Contract extends Model
         'payment_term_id',
         'status',
         'monthly_fee',
+        'contrato'
     ];
 
     protected $guarded = [

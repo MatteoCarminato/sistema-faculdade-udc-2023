@@ -18,10 +18,10 @@ abstract class BaseService
         return $this->repository->all($searchTerm);
     }
 
-    // public function create($data)
-    // {
-    //   return $this->repository->create($data);
-    // }
+    public function create($data)
+    {
+      return $this->repository->create($data);
+    }
 
     // public function update($dataModule, $validatedData)
     // {

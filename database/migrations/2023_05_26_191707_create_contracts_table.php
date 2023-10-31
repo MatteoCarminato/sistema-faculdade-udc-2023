@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('group_id');
             $table->unsignedInteger('payment_term_id');
             $table->enum('status', ['pendente', 'confirmado', 'cancelado'])->default('pendente');
+            $table->string('contrato')->nullable();
             $table->decimal('monthly_fee', 8, 2);
             
             $table->timestamps();
