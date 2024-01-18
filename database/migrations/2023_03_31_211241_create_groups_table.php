@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->enum('status',['ativo','inativo'])->default('ativo');
            
-            $table->unsignedTinyInteger('category_id');
-            $table->unsignedTinyInteger('modality_id');
+            $table->foreignId('category_id');
+            $table->foreignId('modality_id');
             $table->unsignedTinyInteger('teacher_id');
-            $table->unsignedTinyInteger('locals_id');
+            $table->foreignId('locals_id');
             $table->integer('year');
 
             $table->timestamps();

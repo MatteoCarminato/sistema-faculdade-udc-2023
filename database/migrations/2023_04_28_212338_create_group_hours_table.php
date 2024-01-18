@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('hour');
             $table->integer('year');
             $table->unsignedTinyInteger('teacher_id');
-            $table->unsignedTinyInteger('locals_id');
-            $table->unsignedTinyInteger('groups_id');
+            $table->foreignId('locals_id');
+            $table->foreignId('groups_id');
 
             $table->timestamps();
             $table->softDeletes();

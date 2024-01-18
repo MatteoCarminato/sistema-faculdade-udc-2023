@@ -9,7 +9,7 @@ class CreateCountriesTable extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedTinyInteger('id')->autoIncrement();
             $table->string('name');
             $table->string('acronym')->nullable();
             $table->string('slug')->unique();
